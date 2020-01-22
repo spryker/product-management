@@ -7,10 +7,10 @@
 
 namespace Spryker\Zed\ProductManagement\Dependency\Facade;
 
-interface ProductManagementToStockInterface
+interface ProductManagementToStoreFacadeInterface
 {
     /**
-     * @return array
+     * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getWarehouseToStoreMapping();
+    public function getCurrentStore();
 }
