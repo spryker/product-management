@@ -102,7 +102,6 @@ class ProductConcreteSuperAttributeForm extends AbstractType
      */
     protected function addCustomValueFields(FormBuilderInterface $builder, array $options)
     {
-        /** @var \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer */
         $productManagementAttributeTransfer = $options[static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_TRANSFER];
 
         if (!$productManagementAttributeTransfer->getAllowInput()) {

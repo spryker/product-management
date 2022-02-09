@@ -106,7 +106,7 @@ class EditController extends AddController
             }
         }
 
-        $type = (string)$request->query->get(static::PARAM_PRODUCT_TYPE);
+        $type = $request->query->get(static::PARAM_PRODUCT_TYPE);
 
         $variantTable = $this
             ->getFactory()

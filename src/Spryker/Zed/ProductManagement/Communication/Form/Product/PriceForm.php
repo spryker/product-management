@@ -174,7 +174,7 @@ class PriceForm extends AbstractType
     /**
      * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
      *
-     * @return int
+     * @return float|int
      */
     protected function getDivisor(CurrencyTransfer $currencyTransfer)
     {
@@ -185,7 +185,7 @@ class PriceForm extends AbstractType
             $divisor = pow(10, $fractionDigits);
         }
 
-        return (int)$divisor;
+        return $divisor;
     }
 
     /**
