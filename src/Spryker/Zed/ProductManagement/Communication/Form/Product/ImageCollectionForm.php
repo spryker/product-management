@@ -66,6 +66,16 @@ class ImageCollectionForm extends AbstractSubForm
     /**
      * @var string
      */
+    public const FIELD_ALT_TEXT_SMALL = 'alt_text_small';
+
+    /**
+     * @var string
+     */
+    public const FIELD_ALT_TEXT_LARGE = 'alt_text_large';
+
+    /**
+     * @var string
+     */
     public const OPTION_IMAGE_PREVIEW_LARGE_URL = 'option_image_preview_large_url';
 
     /**
@@ -120,7 +130,9 @@ class ImageCollectionForm extends AbstractSubForm
             ->addImagePreviewField($builder, $options)
             ->addImageSmallField($builder, $options)
             ->addImageBigField($builder, $options)
-            ->addSortOrderField($builder, $options);
+            ->addSortOrderField($builder, $options)
+            ->addAltTextSmallField($builder, $options)
+            ->addAltTextLargeField($builder, $options);
     }
 
     /**
@@ -276,6 +288,52 @@ class ImageCollectionForm extends AbstractSubForm
                     'data-sort-order' => static::DEFAULT_SORT_ORDER_VALUE,
                 ],
             ]);
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return $this
+     */
+    protected function addAltTextSmallField(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(static::FIELD_ALT_TEXT_SMALL, TextType::class, [
+            'required' => false,
+            'label' => 'Alt text small',
+            'constraints' => [
+                new Length([
+                    'min' => 0,
+                    'max' => 255,
+                ]),
+            ],
+            'sanitize_xss' => true,
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return $this
+     */
+    protected function addAltTextLargeField(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(static::FIELD_ALT_TEXT_LARGE, TextType::class, [
+            'required' => false,
+            'label' => 'Alt text large',
+            'constraints' => [
+                new Length([
+                    'min' => 0,
+                    'max' => 255,
+                ]),
+            ],
+            'sanitize_xss' => true,
+        ]);
 
         return $this;
     }

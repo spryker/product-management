@@ -106,3 +106,5 @@ Price,Price
 select,select
 "Product name","Product name"
 Types,Types
+Alt text small,Alt text small
+Alt text large,Alt text large
