@@ -7,20 +7,20 @@
                     {% embed '@Gui/Partials/localized-ibox.twig' with {'collapsed': (not loop.parent.loop.first), 'localeName': localeTransfer.localeName} %}
                         {% block content %}
                             <div class="row">
-                                <div class="col-xs-2"><b>{{ 'Meta Title' | trans }}</b></div>
-                                <div class="col-xs-10">{{ localizedData.meta_title }}</div>
+                                <div class="col-2"><b>{{ 'Meta Title' | trans }}</b></div>
+                                <div class="col-10">{{ localizedData.meta_title }}</div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="row">
-                                <div class="col-xs-2"><b>{{ 'Description' | trans }}</b></div>
-                                <div class="col-xs-10">
+                                <div class="col-2"><b>{{ 'Description' | trans }}</b></div>
+                                <div class="col-10">
                                     {{ localizedData.meta_description }}
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="row">
-                                <div class="col-xs-2"><b>{{ 'Keywords' | trans }}</b></div>
-                                <div class="col-xs-10">
+                                <div class="col-2"><b>{{ 'Keywords' | trans }}</b></div>
+                                <div class="col-10">
                                     {{ localizedData.meta_keywords }}
                                 </div>
                             </div>

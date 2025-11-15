@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\ProductManagement\Communication\From\DataProvider;
+namespace SprykerTest\Zed\ProductManagement\Communication\Controller;
 
 use Codeception\Test\Unit;
 use ReflectionClass;
@@ -18,8 +18,7 @@ use Spryker\Zed\ProductManagement\Communication\Controller\ViewController;
  * @group Zed
  * @group ProductManagement
  * @group Communication
- * @group From
- * @group DataProvider
+ * @group Controller
  * @group ViewControllerTest
  * Add your own group annotations below this line
  */

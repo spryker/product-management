@@ -14,10 +14,10 @@
 
         {% if merchant is defined and merchant is not empty %}
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-sm-2">
                     <strong>{{ 'Merchant' | trans }}</strong>
                 </div>
-                <div class="col-xs-10">
+                <div class="col-sm-10">
                     <a target="_blank" href="/merchant-gui/edit-merchant?id-merchant={{ merchant.idMerchant}}">
                         {{ merchant.name }}
                     </a>

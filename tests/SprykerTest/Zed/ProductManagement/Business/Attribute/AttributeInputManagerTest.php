@@ -5,10 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\ProductManagement\Business\Attribute;
+namespace SprykerTest\Zed\ProductManagement\Business\Attribute;
 
 use Codeception\Test\Unit;
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
+use Spryker\Zed\ProductManagement\Business\Attribute\AttributeInputManager;
 use SprykerTest\Zed\ProductManagement\ProductManagementBusinessTester;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 /**
  * Auto-generated group annotations
  *
- * @group Spryker
+ * @group SprykerTest
  * @group Zed
  * @group ProductManagement
  * @group Business

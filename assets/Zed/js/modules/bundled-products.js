@@ -16,8 +16,8 @@ $(document).ready(function () {
         scrollX: 'auto',
         autoWidth: false,
         dom:
-            "<'row'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col col-md-6'i><'col col-md-6'f>>" +
+            "<'row'<'col'tr>>" +
             "<'alt-row'<'alt-row__left'l><'alt-row__center'p>>",
         fnDrawCallback: function (settings) {
             $('.product_assign_checkbox').off('change');

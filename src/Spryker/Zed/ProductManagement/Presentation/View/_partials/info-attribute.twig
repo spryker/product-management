@@ -15,8 +15,8 @@
 
                     {% for name,value in attributes %}
                         <div class="row">
-                            <div class="col-xs-4"><b>{{ name }}</b></div>
-                            <div class="col-xs-8">{{ value | join(', ') }}</div>
+                            <div class="col-4"><b>{{ name }}</b></div>
+                            <div class="col-8">{{ value | join(', ') }}</div>
                         </div>
                         {% if not loop.last %}
                             <div class="hr-line-dashed"></div>

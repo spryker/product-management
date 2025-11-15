@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\ProductManagement\Communication\From\DataProvider;
+namespace SprykerTest\Zed\ProductManagement\Communication\Form\Validator\Constraints;
 
 use Codeception\Test\Unit;
 use Spryker\Zed\ProductManagement\Communication\Form\Validator\Constraints\SkuRegex;
@@ -18,8 +18,9 @@ use Symfony\Component\Validator\Validation;
  * @group Zed
  * @group ProductManagement
  * @group Communication
- * @group From
- * @group DataProvider
+ * @group Form
+ * @group Validator
+ * @group Constraints
  * @group SkuRegexTest
  * Add your own group annotations below this line
  */
