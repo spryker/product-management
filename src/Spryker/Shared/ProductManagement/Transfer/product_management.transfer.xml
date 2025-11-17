@@ -219,4 +219,18 @@
         <property name="stores" type="int[]" singular="store"/>
     </transfer>
 
+    <transfer name="ProductReadiness" strict="true">
+        <property name="title" type="string"/>
+        <property name="values" type="string[]" singular="value"/>
+    </transfer>
+
+    <transfer name="ProductAbstractReadinessRequest" strict="true">
+        <property name="productAbstract" type="ProductAbstract"/>
+        <property name="productConcretes" type="ProductConcrete[]" singular="productConcrete"/>
+    </transfer>
+
+    <transfer name="ProductConcreteReadinessRequest" strict="true">
+        <property name="productConcrete" type="ProductConcrete"/>
+    </transfer>
+
 </transfers>

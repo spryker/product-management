@@ -22,6 +22,7 @@
     {{ backActionButton('/product-management', 'List Products' | trans) }}
     {{ editActionButton(url('/product-management/edit/variant', {'id-product': idProduct, 'id-product-abstract': idProductAbstract}), 'Edit' | trans) }}
     {{ editActionButton('/product-attribute-gui/view/product?id-product=' ~ idProduct, 'Manage Attributes' | trans) }}
+    {{ viewActionButton(url('/product-management/product-readiness/variant', {'id-product-abstract': idProductAbstract, 'id-product': idProduct}), 'Product Concrete Readiness' | trans) }}
 {% endblock %}
 
 

@@ -258,6 +258,16 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
     public const PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER';
 
     /**
+     * @var string
+     */
+    public const PLUGINS_PRODUCT_ABSTRACT_READINESS_PROVIDER = 'PLUGINS_PRODUCT_ABSTRACT_READINESS_PROVIDER';
+
+    /**
+     * @var string
+     */
+    public const PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER = 'PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -313,6 +323,8 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         $container->set(static::FACADE_PRICE, function (Container $container) {
             return new ProductManagementToPriceBridge($container->getLocator()->price()->facade());
         });
+
+        $container = $this->addStoreFacade($container);
 
         return $container;
     }
@@ -426,6 +438,8 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addProductAbstractTransferMapperPlugins($container);
         $container = $this->addProductAbstractFormDataProviderExpanderPlugins($container);
         $container = $this->addTranslatorFacade($container);
+        $container = $this->addProductAbstractReadinessProviderPlugins($container);
+        $container = $this->addProductConcreteReadinessProviderPlugins($container);
 
         return $container;
     }
@@ -1022,5 +1036,49 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         });
 
         return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addProductAbstractReadinessProviderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_ABSTRACT_READINESS_PROVIDER, function (): array {
+            return $this->getProductAbstractReadinessProviderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractReadinessProviderPluginInterface>
+     */
+    protected function getProductAbstractReadinessProviderPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addProductConcreteReadinessProviderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER, function (): array {
+            return $this->getProductConcreteReadinessProviderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductConcreteReadinessProviderPluginInterface>
+     */
+    protected function getProductConcreteReadinessProviderPlugins(): array
+    {
+        return [];
     }
 }

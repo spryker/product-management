@@ -32,8 +32,12 @@ use Spryker\Zed\ProductManagement\Communication\PluginExecutor\AbstractProductEd
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\AbstractProductEditViewExpanderPluginExecutorInterface;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductConcreteEditEditViewExpanderPluginExecutor;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductConcreteEditViewExpanderPluginExecutorInterface;
+use Spryker\Zed\ProductManagement\Communication\Reader\ProductAbstractReadinessReader;
+use Spryker\Zed\ProductManagement\Communication\Reader\ProductAbstractReadinessReaderInterface;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReader;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReaderInterface;
+use Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReader;
+use Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReaderInterface;
 use Spryker\Zed\ProductManagement\Communication\Table\BundledProductTable;
 use Spryker\Zed\ProductManagement\Communication\Table\ProductGroupTable;
 use Spryker\Zed\ProductManagement\Communication\Table\ProductTable;
@@ -195,6 +199,28 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
     public function createMoneyCollectionMultiStoreDataProvider()
     {
         return new ProductMoneyCollectionDataProvider($this->getCurrencyFacade(), $this->getPriceProductFacade());
+    }
+
+    /**
+     * @return \Spryker\Zed\ProductManagement\Communication\Reader\ProductAbstractReadinessReaderInterface
+     */
+    public function createProductAbstractReadinessReader(): ProductAbstractReadinessReaderInterface
+    {
+        return new ProductAbstractReadinessReader(
+            $this->getProductAbstractReadinessProviderPlugins(),
+        );
+    }
+
+    /**
+     * @return \Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReaderInterface
+     */
+    public function createProductConcreteReadinessReader(): ProductConcreteReadinessReaderInterface
+    {
+        return new ProductConcreteReadinessReader(
+            $this->createProductAbstractReadinessReader(),
+            $this->getProductFacade(),
+            $this->getProductConcreteReadinessProviderPlugins(),
+        );
     }
 
     /**
@@ -780,5 +806,21 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return new TableFilterFormDataProvider(
             $this->getStoreFacade(),
         );
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractReadinessProviderPluginInterface>
+     */
+    public function getProductAbstractReadinessProviderPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_READINESS_PROVIDER);
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductConcreteReadinessProviderPluginInterface>
+     */
+    public function getProductConcreteReadinessProviderPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER);
     }
 }

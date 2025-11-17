@@ -1,0 +1,83 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Product Readiness' | trans %}
+
+{% block head_title -%}
+    {{ widget_title }}
+{%- endblock %}
+
+{% block section_title %}
+    {{ widget_title }}: {{ productAbstract.sku }}
+{% endblock %}
+
+{% block action %}
+    {{ backActionButton(url('/product-management'), 'Back to Product Management' | trans) }}
+    {{ viewActionButton(url('/product-management/view', {'id-product-abstract': productAbstract.idProductAbstract}), 'View Abstract Product' | trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Product abstract</strong>
+                </div>
+                <div class="panel-body">
+                    {% if abstractProductReadiness.count > 0 %}
+                        {% for productReadiness in abstractProductReadiness %}
+                            {% if productReadiness.values and productReadiness.values|length > 0 %}
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-xs-4"><strong>{{ productReadiness.title | trans }}:</strong></div>
+                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join(', ') }}</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">{{ 'No data available' | trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Product concrete</strong>
+                </div>
+                <div class="panel-body">
+                    {% if concreteProductCollection|length > 0 %}
+                        {% for concreteProduct in concreteProductCollection %}
+                            <div class="panel panel-default" style="margin-bottom: 20px;">
+                                <div class="panel-heading">
+                                    <strong>{{ concreteProduct.sku }} (ID: {{ concreteProduct.idProductConcrete }})</strong>
+                                </div>
+                                <div class="panel-body">
+                                    {% set concreteReadiness = concreteProductReadinesses[concreteProduct.idProductConcrete] %}
+                                    {% if concreteReadiness|length > 0 %}
+                                        {% for productReadiness in concreteReadiness %}
+                                            {% if productReadiness.values and productReadiness.values|length > 0 %}
+                                                <div class="row" style="margin-bottom: 10px;">
+                                                    <div class="col-xs-4"><strong>{{ productReadiness.title | trans }}:</strong></div>
+                                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join(', ') }}</div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <p class="text-muted">{{ 'No data available' | trans }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">{{ 'No concrete products available' | trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block head_css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ assetsPath('css/spryker-zed-productmanagement-main.css') }}" />
+{% endblock %}
+

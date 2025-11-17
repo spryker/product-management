@@ -111,3 +111,6 @@ Types,Types
 "Apply filters","Apply filters"
 "Reset filters","Reset filters"
 "Variant Status","Variant Status"
+"Product readiness","Product readiness"
+"Product Abstract Readiness","Product Abstract Readiness"
+"Product Concrete Readiness","Product Concrete Readiness"

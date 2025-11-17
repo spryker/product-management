@@ -22,6 +22,7 @@
     {{ backActionButton(url('/product-management'), 'List Products' | trans) }}
     {{ editActionButton('/product-attribute-gui/view/product-abstract?id-product-abstract=' ~ idProductAbstract, 'Manage Attributes' | trans) }}
     {{ editActionButton(url('/product-management/edit', {'id-product-abstract': idProductAbstract}), 'Edit' | trans) }}
+    {{ viewActionButton(url('/product-management/product-readiness', {'id-product-abstract': idProductAbstract}), 'Product Abstract Readiness' | trans, {'class': 'btn-success'}) }}
 {% endblock %}
 
 {% block content %}
