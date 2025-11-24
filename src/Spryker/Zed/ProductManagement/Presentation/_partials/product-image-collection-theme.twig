@@ -38,7 +38,7 @@
             {{ form_rest(form) }}
         </div>
         <div class="col-lg-12">
-            {{ removeActionButton('#', 'Delete image' | trans, {'class': 'remove-image-collection'}) }}
+            {{ removeActionButton('#', 'Delete image' | trans, {'class': 'remove-image-collection', 'is_safe_button': false}) }}
         </div>
         <div class="col-lg-12 image-collection-delimiter">
             <hr>
