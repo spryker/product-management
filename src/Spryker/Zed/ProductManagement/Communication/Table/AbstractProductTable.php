@@ -22,6 +22,6 @@ abstract class AbstractProductTable extends AbstractTable
             return $this->generateLabel('Deactivated', 'label-danger');
         }
 
-        return $this->generateLabel('Active', 'label-info');
+        return $this->generateLabel('Active', 'label-primary');
     }
 }
