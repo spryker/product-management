@@ -19,7 +19,7 @@ interface ProductManagementToStoreFacadeInterface
     public function getCurrentStore(bool $fallbackToDefault = false): StoreTransfer;
 
     /**
-     * @return list<\Generated\Shared\Transfer\StoreTransfer>
+     * @return array<\Generated\Shared\Transfer\StoreTransfer>
      */
     public function getAllStores(): array;
 }

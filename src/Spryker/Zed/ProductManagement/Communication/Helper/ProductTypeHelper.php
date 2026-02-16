@@ -78,6 +78,7 @@ class ProductTypeHelper implements ProductTypeHelperInterface
      */
     public function isGiftCardByProductAbstractEntity(SpyProductAbstract $productAbstractEntity)
     {
+        // @phpstan-ignore function.alreadyNarrowedType (BC check for optional GiftCard module)
         if (!method_exists($productAbstractEntity, 'getSpyGiftCardProductAbstractConfigurationLinks')) {
             return false;
         }

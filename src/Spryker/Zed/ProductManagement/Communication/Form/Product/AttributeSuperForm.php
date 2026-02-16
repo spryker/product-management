@@ -43,6 +43,7 @@ class AttributeSuperForm extends AttributeAbstractForm
         $config['attr']['data-value'] = null;
 
         $idLocale = $this->getFactory()->createLocaleProvider()->getCurrentLocale()->getIdLocale();
+        // @phpstan-ignore instanceof.alwaysTrue (defensive programming)
         if ($this->localeTransfer instanceof LocaleTransfer) {
             $idLocale = $this->localeTransfer->getIdLocale();
         }
