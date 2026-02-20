@@ -232,5 +232,4 @@
     <transfer name="ProductConcreteReadinessRequest" strict="true">
         <property name="productConcrete" type="ProductConcrete"/>
     </transfer>
-
 </transfers>

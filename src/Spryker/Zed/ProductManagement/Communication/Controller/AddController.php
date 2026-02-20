@@ -90,6 +90,10 @@ class AddController extends AbstractController
             }
         }
 
+        $tabContents = $this->getFactory()
+            ->createProductAbstractFormTabDataProviderPluginExecutor()
+            ->provideTabContents(null);
+
         return $this->viewResponse([
             'form' => $form->createView(),
             'currentLocale' => $this->getFactory()->getLocaleFacade()->getCurrentLocale()->getLocaleName(),
@@ -98,6 +102,7 @@ class AddController extends AbstractController
             'attributeLocaleCollection' => $localeProvider->getLocaleCollection(true),
             'productFormAddTabs' => $this->getFactory()->createProductFormAddTabs()->createView(),
             'type' => $type,
+            'tabContents' => $tabContents,
         ]);
     }
 

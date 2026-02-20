@@ -30,6 +30,7 @@ use Spryker\Zed\ProductManagement\Communication\Helper\ProductTypeHelper;
 use Spryker\Zed\ProductManagement\Communication\Helper\ProductValidity\ProductValidityActivityMessenger;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\AbstractProductEditEditViewExpanderPluginExecutor;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\AbstractProductEditViewExpanderPluginExecutorInterface;
+use Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductAbstractFormTabDataProviderPluginExecutor;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductConcreteEditEditViewExpanderPluginExecutor;
 use Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductConcreteEditViewExpanderPluginExecutorInterface;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductAbstractReadinessReader;
@@ -822,5 +823,20 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
     public function getProductConcreteReadinessProviderPlugins(): array
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER);
+    }
+
+    public function createProductAbstractFormTabDataProviderPluginExecutor(): ProductAbstractFormTabDataProviderPluginExecutor
+    {
+        return new ProductAbstractFormTabDataProviderPluginExecutor(
+            $this->getProductAbstractFormTabContentProviderPlugins(),
+        );
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderPluginInterface>
+     */
+    public function getProductAbstractFormTabContentProviderPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER);
     }
 }

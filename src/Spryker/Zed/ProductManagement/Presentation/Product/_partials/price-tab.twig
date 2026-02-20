@@ -11,5 +11,9 @@
 
 {{ form_row(form.tax_rate) }}
 
-
+{% if tabContents[tab.name] is defined %}
+    {% for tabContent in tabContents[tab.name] %}
+        {% include tabContent %}
+    {% endfor %}
+{% endif %}
 

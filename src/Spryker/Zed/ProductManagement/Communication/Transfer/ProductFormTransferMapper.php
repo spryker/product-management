@@ -129,6 +129,7 @@ class ProductFormTransferMapper implements ProductFormTransferMapperInterface
 
         $imageSetCollection = $this->buildProductImageSetCollection($form);
         $productAbstractTransfer->setImageSets(new ArrayObject($imageSetCollection));
+
         $productAbstractTransfer->setStoreRelation($formData[ProductFormAdd::FORM_STORE_RELATION]);
 
         $priceProducts = $this->updatePricesDimension($formData);

@@ -268,6 +268,11 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
     public const PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER = 'PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER';
 
     /**
+     * @var string
+     */
+    public const PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -440,6 +445,7 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addTranslatorFacade($container);
         $container = $this->addProductAbstractReadinessProviderPlugins($container);
         $container = $this->addProductConcreteReadinessProviderPlugins($container);
+        $container = $this->addProductAbstractFormTabContentProviderPlugins($container);
 
         return $container;
     }
@@ -1078,6 +1084,23 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
      * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductConcreteReadinessProviderPluginInterface>
      */
     protected function getProductConcreteReadinessProviderPlugins(): array
+    {
+        return [];
+    }
+
+    protected function addProductAbstractFormTabContentProviderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER, function (): array {
+            return $this->getProductAbstractFormTabContentProviderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderPluginInterface>
+     */
+    protected function getProductAbstractFormTabContentProviderPlugins(): array
     {
         return [];
     }
