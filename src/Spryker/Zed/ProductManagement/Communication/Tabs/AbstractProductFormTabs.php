@@ -95,7 +95,7 @@ abstract class AbstractProductFormTabs extends AbstractTabs
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
             ->setName('image')
-            ->setTitle('Image')
+            ->setTitle('Media')
             ->setTemplate('@ProductManagement/Product/_partials/image-tab.twig');
 
         $tabsViewTransfer->addTab($tabItemTransfer);

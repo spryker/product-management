@@ -55,7 +55,7 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
         LocaleTransfer $currentLocale,
         array $taxCollection,
         $imageUrlPrefix,
-        array $productAbstractFormDataProviderExpanderPlugins = []
+        array $productAbstractFormDataProviderExpanderPlugins = [],
     ) {
         parent::__construct(
             $categoryQueryContainer,

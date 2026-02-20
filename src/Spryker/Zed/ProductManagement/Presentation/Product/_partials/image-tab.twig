@@ -30,3 +30,9 @@
         {% endembed %}
     {% endif %}
 {% endfor %}
+
+{% if tabContents[tab.name] is defined %}
+    {% for tabContent in tabContents[tab.name] %}
+        {% include tabContent %}
+    {% endfor %}
+{% endif %}

@@ -53,6 +53,12 @@
     form: form,
 } %}
 
+{% if tabContents[tab.name] is defined %}
+    {% for tabContent in tabContents[tab.name] %}
+        {% include tabContent %}
+    {% endfor %}
+{% endif %}
+
 {% block footer_js %}
     <script src="{{ assetsPath('js/spryker-zed-productmanagement-concrete-add.js') }}"></script>
 {% endblock %}

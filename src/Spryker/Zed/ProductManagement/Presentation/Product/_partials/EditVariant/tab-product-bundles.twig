@@ -29,6 +29,12 @@
     {% endfor %}
 </div>
 
+{% if tabContents[tab.name] is defined %}
+    {% for tabContent in tabContents[tab.name] %}
+        {% include tabContent %}
+    {% endfor %}
+{% endif %}
+
 {% do form.assigned_bundled_products.setRendered %}
 
 

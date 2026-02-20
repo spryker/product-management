@@ -216,7 +216,7 @@ class AbstractProductFormDataProvider
         array $taxCollection,
         $imageUrlPrefix,
         ?ProductAttributeReaderInterface $productAttributeReader = null,
-        array $productAbstractFormDataProviderExpanderPlugins = []
+        array $productAbstractFormDataProviderExpanderPlugins = [],
     ) {
         $this->categoryQueryContainer = $categoryQueryContainer;
         $this->productManagementQueryContainer = $productManagementQueryContainer;

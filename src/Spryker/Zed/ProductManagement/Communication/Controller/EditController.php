@@ -132,6 +132,12 @@ class EditController extends AddController
             ->createAbstractProductEditViewExpanderPluginExecutor()
             ->expandEditAbstractProductViewData($viewData);
 
+        $tabContents = $this->getFactory()
+            ->createProductAbstractFormTabDataProviderPluginExecutor()
+            ->provideTabContents($productAbstractTransfer);
+
+        $viewData['tabContents'] = $tabContents;
+
         return $this->viewResponse($viewData);
     }
 

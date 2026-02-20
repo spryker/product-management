@@ -84,4 +84,10 @@
             {{ form_row(form.product_abstract_types) }}
         {% endif %}
     {% endblock %}
+
+    {% if tabContents[tab.name] is defined %}
+        {% for tabContent in tabContents[tab.name] %}
+            {% include tabContent %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
