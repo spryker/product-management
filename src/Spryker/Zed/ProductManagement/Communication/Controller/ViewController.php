@@ -338,11 +338,6 @@ class ViewController extends AddController
         }, $stores->getArrayCopy());
     }
 
-    /**
-     * @param array $viewData
-     *
-     * @return array
-     */
     protected function executeProductAbstractViewActionViewDataExpanderPlugins(array $viewData): array
     {
         foreach ($this->getFactory()->getProductAbstractViewActionViewDataExpanderPlugins() as $productAbstractViewActionViewDataExpanderPlugin) {
@@ -352,11 +347,6 @@ class ViewController extends AddController
         return $viewData;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\TaxSetTransfer|null
-     */
     protected function findTaxSet(ProductAbstractTransfer $productAbstractTransfer): ?TaxSetTransfer
     {
         if (!$productAbstractTransfer->getIdTaxSet()) {

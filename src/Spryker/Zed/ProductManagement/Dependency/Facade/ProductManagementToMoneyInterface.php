@@ -25,11 +25,6 @@ interface ProductManagementToMoneyInterface
      */
     public function convertIntegerToDecimal($value): float;
 
-    /**
-     * @param \Generated\Shared\Transfer\MoneyTransfer $moneyTransfer
-     *
-     * @return string
-     */
     public function formatWithSymbol(MoneyTransfer $moneyTransfer): string;
 
     /**

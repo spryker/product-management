@@ -44,11 +44,6 @@ class ProductManagementToMoneyBridge implements ProductManagementToMoneyInterfac
         return $this->moneyFacade->convertIntegerToDecimal($value);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MoneyTransfer $moneyTransfer
-     *
-     * @return string
-     */
     public function formatWithSymbol(MoneyTransfer $moneyTransfer): string
     {
         return $this->moneyFacade->formatWithSymbol($moneyTransfer);

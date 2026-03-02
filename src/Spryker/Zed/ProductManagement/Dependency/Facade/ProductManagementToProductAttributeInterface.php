@@ -13,29 +13,14 @@ use Generated\Shared\Transfer\ProductManagementAttributeTransfer;
 
 interface ProductManagementToProductAttributeInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeTransfer
-     */
     public function createProductManagementAttribute(
         ProductManagementAttributeTransfer $productManagementAttributeTransfer
     ): ProductManagementAttributeTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeTransfer
-     */
     public function updateProductManagementAttribute(
         ProductManagementAttributeTransfer $productManagementAttributeTransfer
     ): ProductManagementAttributeTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return void
-     */
     public function translateProductManagementAttribute(ProductManagementAttributeTransfer $productManagementAttributeTransfer): void;
 
     /**
@@ -50,11 +35,6 @@ interface ProductManagementToProductAttributeInterface
      */
     public function getUniqueSuperAttributesFromConcreteProducts(array $productConcreteTransfers): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeFilterTransfer $productManagementAttributeFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeCollectionTransfer
-     */
     public function getProductManagementAttributes(
         ProductManagementAttributeFilterTransfer $productManagementAttributeFilterTransfer
     ): ProductManagementAttributeCollectionTransfer;

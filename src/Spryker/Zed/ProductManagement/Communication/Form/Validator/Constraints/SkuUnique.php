@@ -33,9 +33,6 @@ class SkuUnique extends Constraint
         $this->productFacade = $productFacade;
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface
-     */
     public function getProductFacade(): ProductManagementToProductInterface
     {
         return $this->productFacade;

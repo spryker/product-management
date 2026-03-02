@@ -910,9 +910,6 @@ class AbstractProductFormDataProvider
         return new ArrayObject($priceProducts);
     }
 
-    /**
-     * @return \Everon\Component\Collection\Collection
-     */
     protected function getAttributeTransferCollection(): Collection
     {
         if ($this->productAttributeReader === null) {

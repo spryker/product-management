@@ -22,11 +22,6 @@ class ProductConcreteEditEditViewExpanderPluginExecutor implements ProductConcre
         $this->productConcreteEditViewExpanderPlugins = $productConcreteEditViewExpanderPlugins;
     }
 
-    /**
-     * @param array $viewData
-     *
-     * @return array
-     */
     public function expandEditVariantViewData(array $viewData): array
     {
         foreach ($this->productConcreteEditViewExpanderPlugins as $plugin) {

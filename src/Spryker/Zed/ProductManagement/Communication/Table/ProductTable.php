@@ -244,14 +244,6 @@ class ProductTable extends AbstractProductTable
         return $config;
     }
 
-    /**
-     * @param string $searchPattern
-     * @param string $value
-     * @param string $filter
-     * @param string $conditionParameter
-     *
-     * @return string
-     */
     protected function buildCondition(
         string $searchPattern,
         string $value,
@@ -268,13 +260,6 @@ class ProductTable extends AbstractProductTable
         return parent::buildCondition($searchPattern, $value, $filter, $conditionParameter);
     }
 
-    /**
-     * @param string $value
-     * @param string $filter
-     * @param string $conditionParameter
-     *
-     * @return string
-     */
     protected function buildConditionWithStrictSearch(
         string $value,
         string $filter,
@@ -290,11 +275,6 @@ class ProductTable extends AbstractProductTable
         );
     }
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     protected function executeProductTableConfigurationExpanderPlugins(TableConfiguration $config): TableConfiguration
     {
         foreach ($this->productTableConfigurationExpanderPlugins as $productTableConfigurationExpanderPlugin) {
@@ -336,11 +316,6 @@ class ProductTable extends AbstractProductTable
         return $this->formatProductAbstractIds($productAbstractCollection);
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function expandQueryWithFilterConditions(SpyProductAbstractQuery $productAbstractQuery): SpyProductAbstractQuery
     {
         if ($this->productTableCriteriaTransfer === null) {
@@ -352,11 +327,6 @@ class ProductTable extends AbstractProductTable
         return $productAbstractQuery;
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function expandQueryWithStatusFilter(SpyProductAbstractQuery $productAbstractQuery): SpyProductAbstractQuery
     {
         $status = $this->productTableCriteriaTransfer->getStatus();
@@ -375,11 +345,6 @@ class ProductTable extends AbstractProductTable
         return $productAbstractQuery;
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $productAbstractQuery
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function expandQueryWithStoreFilter(SpyProductAbstractQuery $productAbstractQuery): SpyProductAbstractQuery
     {
         $stores = $this->productTableCriteriaTransfer->getStores();
@@ -670,11 +635,6 @@ class ProductTable extends AbstractProductTable
         return $this->generateLabel('No', null);
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $query
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function expandPropelQuery(SpyProductAbstractQuery $query): ModelCriteria
     {
         if ($this->isConcreteSkuSearchEnabled()) {
@@ -684,11 +644,6 @@ class ProductTable extends AbstractProductTable
         return $this->productManagementRepository->expandQuery($query);
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstractQuery $query
-     *
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function addConcreteProductSkuSearch(SpyProductAbstractQuery $query): SpyProductAbstractQuery
     {
         $query->distinct()
@@ -728,9 +683,6 @@ class ProductTable extends AbstractProductTable
         return $productData;
     }
 
-    /**
-     * @return bool
-     */
     protected function isConcreteSkuSearchEnabled(): bool
     {
         $searchTerm = $this->getSearchTerm();

@@ -18,9 +18,6 @@ class ProductAttributeReader implements ProductAttributeReaderInterface
      */
     protected $productAttributeFacade;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductAttributeInterface $productAttributeFacade
-     */
     public function __construct(ProductManagementToProductAttributeInterface $productAttributeFacade)
     {
         $this->productAttributeFacade = $productAttributeFacade;

@@ -19,9 +19,6 @@ class ProductTypeHelper implements ProductTypeHelperInterface
      */
     protected $productQueryQueryContainer;
 
-    /**
-     * @param \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface $productQueryContainer
-     */
     public function __construct(ProductQueryContainerInterface $productQueryContainer)
     {
         $this->productQueryQueryContainer = $productQueryContainer;

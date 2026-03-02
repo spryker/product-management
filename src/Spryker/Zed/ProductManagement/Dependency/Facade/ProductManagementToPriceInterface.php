@@ -9,18 +9,9 @@ namespace Spryker\Zed\ProductManagement\Dependency\Facade;
 
 interface ProductManagementToPriceInterface
 {
-    /**
-     * @return string
-     */
     public function getNetPriceModeIdentifier(): string;
 
-    /**
-     * @return string
-     */
     public function getGrossPriceModeIdentifier(): string;
 
-    /**
-     * @return string
-     */
     public function getDefaultPriceMode(): string;
 }

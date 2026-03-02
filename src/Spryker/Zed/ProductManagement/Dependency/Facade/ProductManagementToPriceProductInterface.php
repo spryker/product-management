@@ -16,9 +16,6 @@ interface ProductManagementToPriceProductInterface
      */
     public function getPriceTypeValues(): array;
 
-    /**
-     * @return string
-     */
     public function getDefaultPriceTypeName(): string;
 
     /**
@@ -29,9 +26,6 @@ interface ProductManagementToPriceProductInterface
      */
     public function findProductConcretePrices(int $idProductConcrete, int $idProductAbstract): array;
 
-    /**
-     * @return string
-     */
     public function getPriceModeIdentifierForBothType(): string;
 
     /**

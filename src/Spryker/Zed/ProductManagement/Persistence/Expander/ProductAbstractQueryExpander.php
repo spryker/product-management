@@ -26,11 +26,6 @@ class ProductAbstractQueryExpander implements ProductAbstractQueryExpanderInterf
         $this->productTableQueryCriteriaExpanderPlugins = $productTableQueryCriteriaExpanderPlugins;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     public function expandQuery(ModelCriteria $query): ModelCriteria
     {
         $queryCriteriaTransfer = $this->buildQueryCriteriaTransfer();
@@ -40,9 +35,6 @@ class ProductAbstractQueryExpander implements ProductAbstractQueryExpanderInterf
         return $query;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-     */
     protected function buildQueryCriteriaTransfer(): QueryCriteriaTransfer
     {
         $queryCriteriaTransfer = new QueryCriteriaTransfer();
@@ -54,12 +46,6 @@ class ProductAbstractQueryExpander implements ProductAbstractQueryExpanderInterf
         return $queryCriteriaTransfer;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function addJoin(
         ModelCriteria $query,
         QueryCriteriaTransfer $queryCriteriaTransfer
@@ -81,12 +67,6 @@ class ProductAbstractQueryExpander implements ProductAbstractQueryExpanderInterf
         return $query;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function addWithColumns(
         ModelCriteria $query,
         QueryCriteriaTransfer $queryCriteriaTransfer

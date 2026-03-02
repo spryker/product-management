@@ -53,11 +53,6 @@ class TableFilterForm extends AbstractType
      */
     protected const PLACEHOLDER_STORES = 'Select Stores';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

@@ -55,11 +55,6 @@ class ProductFormEditTabs extends ProductFormAddTabs
         return $this->executeExpanderPlugins($tabsViewTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
-     * @return \Generated\Shared\Transfer\TabsViewTransfer
-     */
     protected function executeExpanderPlugins(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
         foreach ($this->productAbstractFormEditTabsExpanderPlugins as $productAbstractFormEditTabsExpanderPlugin) {

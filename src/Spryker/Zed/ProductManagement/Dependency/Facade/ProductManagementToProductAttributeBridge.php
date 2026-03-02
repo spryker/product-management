@@ -26,33 +26,18 @@ class ProductManagementToProductAttributeBridge implements ProductManagementToPr
         $this->productAttributeFacade = $productAttributeFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeTransfer
-     */
     public function createProductManagementAttribute(
         ProductManagementAttributeTransfer $productManagementAttributeTransfer
     ): ProductManagementAttributeTransfer {
         return $this->productAttributeFacade->createProductManagementAttribute($productManagementAttributeTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeTransfer
-     */
     public function updateProductManagementAttribute(
         ProductManagementAttributeTransfer $productManagementAttributeTransfer
     ): ProductManagementAttributeTransfer {
         return $this->productAttributeFacade->updateProductManagementAttribute($productManagementAttributeTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeTransfer $productManagementAttributeTransfer
-     *
-     * @return void
-     */
     public function translateProductManagementAttribute(ProductManagementAttributeTransfer $productManagementAttributeTransfer): void
     {
         $this->productAttributeFacade->translateProductManagementAttribute($productManagementAttributeTransfer);
@@ -76,11 +61,6 @@ class ProductManagementToProductAttributeBridge implements ProductManagementToPr
         return $this->productAttributeFacade->getUniqueSuperAttributesFromConcreteProducts($productConcreteTransfers);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductManagementAttributeFilterTransfer $productManagementAttributeFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductManagementAttributeCollectionTransfer
-     */
     public function getProductManagementAttributes(
         ProductManagementAttributeFilterTransfer $productManagementAttributeFilterTransfer
     ): ProductManagementAttributeCollectionTransfer {

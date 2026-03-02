@@ -113,9 +113,6 @@ class ProductTableTest extends Unit
      */
     protected $localeTransfers;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -127,9 +124,6 @@ class ProductTableTest extends Unit
         $this->registerLocaleService();
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataShouldReturnProductsWithDefaultLocale(): void
     {
         // Arrange
@@ -196,9 +190,6 @@ class ProductTableTest extends Unit
         $this->assertEquals($abstractSku, $productTableData[0][ProductTableMock::COL_SKU]);
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataShouldReturnProductsWithNotDefaultLocaleWhenDefaultLocaleDoesNotPresentForTheProduct(): void
     {
         // Arrange
@@ -230,9 +221,6 @@ class ProductTableTest extends Unit
         $this->assertEqualsCanonicalizing($expectedProductTableData, $productTableData);
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataShouldReturnProductsFilteredByStatus(): void
     {
         // Arrange
@@ -260,9 +248,6 @@ class ProductTableTest extends Unit
         $this->assertEquals($abstractSku, $productTableData[0][ProductTableMock::COL_SKU]);
     }
 
-    /**
-     * @return void
-     */
     public function testFetchDataShouldReturnProductsFilteredByStores(): void
     {
         // Arrange
@@ -296,27 +281,18 @@ class ProductTableTest extends Unit
         $this->assertEquals($abstractSku, $productTableData[0][ProductTableMock::COL_SKU]);
     }
 
-    /**
-     * @return void
-     */
     protected function registerTwigServiceMock(): void
     {
         $this->tester->getContainer()
             ->set(static::SERVICE_TWIG, $this->getTwigMock());
     }
 
-    /**
-     * @return void
-     */
     protected function registerUtilNumberService(): void
     {
         $this->tester->getContainer()
             ->set(static::SERVICE_UTIL_NUMBER, $this->tester->getUtilService());
     }
 
-    /**
-     * @return void
-     */
     protected function registerLocaleService(): void
     {
         $this->tester->getContainer()
@@ -339,17 +315,11 @@ class ProductTableTest extends Unit
         return $twigMock;
     }
 
-    /**
-     * @return \Twig\Loader\LoaderInterface
-     */
     protected function createChainLoader(): LoaderInterface
     {
         return new ChainLoader();
     }
 
-    /**
-     * @return void
-     */
     protected function setupLocales(): void
     {
         if (!isset($this->localeTransfers[static::LOCALE_NAME_DE])) {
@@ -361,12 +331,6 @@ class ProductTableTest extends Unit
         }
     }
 
-    /**
-     * @param int $idLocale
-     * @param string $localeName
-     *
-     * @return \Generated\Shared\Transfer\LocaleTransfer
-     */
     protected function createLocaleTransfer(int $idLocale, string $localeName): LocaleTransfer
     {
         return (new LocaleTransfer())
@@ -375,12 +339,6 @@ class ProductTableTest extends Unit
             ->setLocaleName($localeName);
     }
 
-    /**
-     * @param string $localizedAttributeName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \Generated\Shared\Transfer\LocalizedAttributesTransfer
-     */
     protected function createLocalizedAttributesTransfer(string $localizedAttributeName, LocaleTransfer $localeTransfer): LocalizedAttributesTransfer
     {
         return (new LocalizedAttributesTransfer())
@@ -388,11 +346,6 @@ class ProductTableTest extends Unit
             ->setLocale($localeTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \SprykerTest\Zed\ProductManagement\Communication\Table\ProductTableMock
-     */
     protected function createProductTableMock(LocaleTransfer $localeTransfer): ProductTableMock
     {
         $productQueryContainer = $this->createProductQueryContainer();
@@ -414,9 +367,6 @@ class ProductTableTest extends Unit
         );
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductBridge
-     */
     protected function createProductManagementToProductBridge(): ProductManagementToProductBridge
     {
         return new ProductManagementToProductBridge(
@@ -424,39 +374,21 @@ class ProductTableTest extends Unit
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface
-     */
     protected function createProductQueryContainer(): ProductQueryContainerInterface
     {
         return new ProductQueryContainer();
     }
 
-    /**
-     * @param \Spryker\Zed\Product\Persistence\ProductQueryContainer $productQueryContainer
-     *
-     * @return \Spryker\Zed\ProductManagement\Communication\Helper\ProductTypeHelper
-     */
     protected function createProductTypeHelper(ProductQueryContainer $productQueryContainer): ProductTypeHelper
     {
         return new ProductTypeHelper($productQueryContainer);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Persistence\ProductManagementRepositoryInterface
-     */
     protected function createProductManagementRepository(): ProductManagementRepositoryInterface
     {
         return new ProductManagementRepository();
     }
 
-    /**
-     * @param int $idProductAbstract
-     * @param string $sku
-     * @param string $name
-     *
-     * @return array
-     */
     protected function buildExpectedRow(int $idProductAbstract, string $sku, string $name): array
     {
         return [

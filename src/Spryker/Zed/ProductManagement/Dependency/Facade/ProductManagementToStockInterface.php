@@ -9,8 +9,5 @@ namespace Spryker\Zed\ProductManagement\Dependency\Facade;
 
 interface ProductManagementToStockInterface
 {
-    /**
-     * @return array
-     */
     public function getWarehouseToStoreMapping(): array;
 }

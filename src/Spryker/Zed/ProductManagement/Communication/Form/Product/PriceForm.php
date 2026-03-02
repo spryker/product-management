@@ -73,11 +73,6 @@ class PriceForm extends AbstractType
      */
     public const MAX_PRICE_SIZE = 2147483647; // 32 bit integer
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

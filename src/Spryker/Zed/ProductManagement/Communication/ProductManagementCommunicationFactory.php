@@ -202,9 +202,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return new ProductMoneyCollectionDataProvider($this->getCurrencyFacade(), $this->getPriceProductFacade());
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Reader\ProductAbstractReadinessReaderInterface
-     */
     public function createProductAbstractReadinessReader(): ProductAbstractReadinessReaderInterface
     {
         return new ProductAbstractReadinessReader(
@@ -212,9 +209,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReaderInterface
-     */
     public function createProductConcreteReadinessReader(): ProductConcreteReadinessReaderInterface
     {
         return new ProductConcreteReadinessReader(
@@ -304,9 +298,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_PRODUCT);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductBundleInterface
-     */
     public function getProductBundleFacade(): ProductManagementToProductBundleInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_PRODUCT_BUNDLE);
@@ -336,9 +327,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::SERVICE_UTIL_ENCODING);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReaderInterface
-     */
     public function createProductAttributeReader(): ProductAttributeReaderInterface
     {
         return new ProductAttributeReader($this->getProductAttributeFacade());
@@ -559,17 +547,11 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_AVAILABILITY);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToStoreFacadeInterface
-     */
     protected function getStoreFacade(): ProductManagementToStoreFacadeInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_STORE);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToTranslatorFacadeInterface
-     */
     public function getTranslatorFacade(): ProductManagementToTranslatorFacadeInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_TRANSLATOR);
@@ -665,17 +647,11 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_CONCRETE_FORM_EXPANDER);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Helper\ProductConcreteSuperAttributeFilterHelperInterface
-     */
     public function createProductConcreteSuperAttributeFilterHelper(): ProductConcreteSuperAttributeFilterHelperInterface
     {
         return new ProductConcreteSuperAttributeFilterHelper();
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Helper\ProductAttributeHelperInterface
-     */
     public function createProductAttributeHelper(): ProductAttributeHelperInterface
     {
         return new ProductAttributeHelper(
@@ -684,17 +660,11 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductCategoryInterface
-     */
     public function getProductCategoryFacade(): ProductManagementToProductCategoryInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_PRODUCT_CATEGORY);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\PluginExecutor\AbstractProductEditViewExpanderPluginExecutorInterface
-     */
     public function createAbstractProductEditViewExpanderPluginExecutor(): AbstractProductEditViewExpanderPluginExecutorInterface
     {
         return new AbstractProductEditEditViewExpanderPluginExecutor(
@@ -702,9 +672,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\PluginExecutor\ProductConcreteEditViewExpanderPluginExecutorInterface
-     */
     public function createProductConcreteEditViewExpanderPluginExecutor(): ProductConcreteEditViewExpanderPluginExecutorInterface
     {
         return new ProductConcreteEditEditViewExpanderPluginExecutor(
@@ -784,12 +751,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_TRANSFER_MAPPER);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductTableCriteriaTransfer $productTableCriteriaTransfer
-     * @param array $options
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function createTableFilterForm(ProductTableCriteriaTransfer $productTableCriteriaTransfer, array $options = []): FormInterface
     {
         return $this->getFormFactory()->create(
@@ -799,9 +760,6 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Form\DataProvider\TableFilterFormDataProvider
-     */
     public function createTableFilterFormDataProvider(): TableFilterFormDataProvider
     {
         return new TableFilterFormDataProvider(

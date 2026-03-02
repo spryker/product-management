@@ -13,14 +13,8 @@ use Generated\Shared\Transfer\TaxSetTransfer;
 
 interface ProductManagementToTaxInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\TaxRateCollectionTransfer
-     */
     public function getTaxRates(): TaxRateCollectionTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\TaxSetCollectionTransfer
-     */
     public function getTaxSets(): TaxSetCollectionTransfer;
 
     /**

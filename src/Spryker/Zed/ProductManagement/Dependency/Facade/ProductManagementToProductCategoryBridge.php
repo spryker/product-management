@@ -25,12 +25,6 @@ class ProductManagementToProductCategoryBridge implements ProductManagementToPro
         $this->categoryFacade = $categoryFacade;
     }
 
-    /**
-     * @param int $idProductAbstract
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \Generated\Shared\Transfer\CategoryCollectionTransfer
-     */
     public function getCategoryTransferCollectionByIdProductAbstract(int $idProductAbstract, LocaleTransfer $localeTransfer): CategoryCollectionTransfer
     {
         return $this->categoryFacade->getCategoryTransferCollectionByIdProductAbstract($idProductAbstract, $localeTransfer);

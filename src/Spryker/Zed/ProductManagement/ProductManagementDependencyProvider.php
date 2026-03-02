@@ -450,11 +450,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = parent::providePersistenceLayerDependencies($container);
@@ -550,11 +545,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         );
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductFacade(Container $container): Container
     {
         $container->set(static::FACADE_PRODUCT, function (Container $container) {
@@ -564,11 +554,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductBundleFacade(Container $container): Container
     {
         $container->set(static::FACADE_PRODUCT_BUNDLE, function (Container $container) {
@@ -592,11 +577,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractFormExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_EXPANDER, function (Container $container) {
@@ -614,11 +594,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteFormExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_CONCRETE_FORM_EXPANDER, function (Container $container) {
@@ -636,11 +611,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteEditFormExpanderPlugins(Container $container): Container
     {
         $container->set(static::PRODUCT_CONCRETE_EDIT_FORM_EXPANDER_PLUGINS, function (Container $container) {
@@ -658,11 +628,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteFormEditDataProviderExpanderPlugins(Container $container): Container
     {
         $container->set(static::PRODUCT_CONCRETE_FORM_EDIT_DATA_PROVIDER_EXPANDER_PLUGINS, function (Container $container) {
@@ -680,11 +645,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductFormTransferMapperExpanderPlugins(Container $container): Container
     {
         $container->set(static::PRODUCT_FORM_TRANSFER_MAPPER_EXPANDER_PLUGINS, function (Container $container) {
@@ -702,11 +662,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteFormEditTabsExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_CONCRETE_FORM_EDIT_TABS_EXPANDER, function (Container $container) {
@@ -724,11 +679,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractFormEditTabsExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_EDIT_TABS_EXPANDER, function () {
@@ -746,11 +696,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractEditViewExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_EDIT_VIEW_EXPANDER, function () {
@@ -768,11 +713,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteEditViewExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_CONCRETE_EDIT_VIEW_EXPANDER, function () {
@@ -790,11 +730,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractListActionViewDataExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_LIST_ACTION_VIEW_DATA_EXPANDER, function () {
@@ -812,11 +747,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractViewActionViewDataExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_VIEW_ACTION_VIEW_DATA_EXPANDER, function () {
@@ -834,11 +764,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductTableQueryCriteriaExpanderPluginInterfaces(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_TABLE_QUERY_CRITERIA_EXPANDER, function () {
@@ -882,11 +807,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductTableConfigurationExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_TABLE_CONFIGURATION_EXPANDER, function (): array {
@@ -904,11 +824,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductTableDataBulkExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_TABLE_DATA_BULK_EXPANDER, function (): array {
@@ -926,11 +841,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductTableActionExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_TABLE_ACTION_EXPANDER, function (): array {
@@ -948,11 +858,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addStoreFacade(Container $container): Container
     {
         $container->set(static::FACADE_STORE, function (Container $container) {
@@ -964,11 +869,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductVariantTableActionExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_VARIANT_TABLE_ACTION_EXPANDER, function (): array {
@@ -986,11 +886,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractTransferMapperPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_TRANSFER_MAPPER, function () {
@@ -1008,11 +903,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractFormDataProviderExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER, function (): array {
@@ -1030,11 +920,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addTranslatorFacade(Container $container): Container
     {
         $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
@@ -1044,11 +929,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductAbstractReadinessProviderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_READINESS_PROVIDER, function (): array {
@@ -1066,11 +946,6 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addProductConcreteReadinessProviderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER, function (): array {

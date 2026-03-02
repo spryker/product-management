@@ -52,9 +52,6 @@ class SkuRegexTest extends Unit
         $this->assertCount($violationsExpectedCount, $violations);
     }
 
-    /**
-     * @return array
-     */
     public function getSkuValidationTestData(): array
     {
         return [

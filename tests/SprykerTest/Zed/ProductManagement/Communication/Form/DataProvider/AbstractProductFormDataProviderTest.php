@@ -50,9 +50,6 @@ class AbstractProductFormDataProviderTest extends Unit
      */
     public const IMAGE_URL_PREFIX = 'IMAGE_URL_PREFIX';
 
-    /**
-     * @return void
-     */
     public function testGetImageUrl(): void
     {
         $productFormDataProviderMock = $this->getProductFormDataProviderMock();
@@ -72,9 +69,6 @@ class AbstractProductFormDataProviderTest extends Unit
         }
     }
 
-    /**
-     * @return array
-     */
     public function prepareTestData(): array
     {
         $data = [

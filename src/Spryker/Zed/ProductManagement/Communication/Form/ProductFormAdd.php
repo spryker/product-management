@@ -202,11 +202,6 @@ class ProductFormAdd extends AbstractType
      */
     public const VALIDATION_GROUP_PRICE_SOURCE = 'validation_group_price_source';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -840,12 +835,6 @@ class ProductFormAdd extends AbstractType
         );
     }
 
-    /**
-     * @param array $validationGroups
-     * @param \Symfony\Component\Form\FormInterface $form
-     *
-     * @return array
-     */
     protected function prepareDefaultsValidationGroups(array $validationGroups, FormInterface $form): array
     {
         return $validationGroups;

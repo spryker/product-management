@@ -22,11 +22,6 @@ abstract class AbstractSubForm extends AbstractType
      */
     public static $errorFieldsDisplayed = [];
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

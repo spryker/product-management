@@ -28,11 +28,6 @@ class ProductManagementProductEditCest
      */
     protected const PAGE_BREADCRUMB = 'Catalog / Products / Edit Product';
 
-    /**
-     * @param \SprykerTest\Zed\ProductManagement\ProductManagementCommunicationTester $i
-     *
-     * @return void
-     */
     public function breadcrumbShouldBeVisibleWhenMoneyFormDoesNotHaveLocaleOption(ProductManagementCommunicationTester $i): void
     {
         $i->haveFullProduct();

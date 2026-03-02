@@ -49,9 +49,6 @@ class ViewControllerTest extends Unit
      */
     public const IMAGE_URL_PREFIX = 'IMAGE_URL_PREFIX';
 
-    /**
-     * @return void
-     */
     public function testGetImageUrl(): void
     {
         $vieControllerMock = $this->getViewControllerMock();
@@ -68,9 +65,6 @@ class ViewControllerTest extends Unit
         }
     }
 
-    /**
-     * @return array
-     */
     public function prepareTestData(): array
     {
         $data = [

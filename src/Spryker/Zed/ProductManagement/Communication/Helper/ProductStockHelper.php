@@ -34,11 +34,6 @@ class ProductStockHelper implements ProductStockHelperInterface
         return $productConcreteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function trimStockQuantities(ProductConcreteTransfer $productConcreteTransfer): ProductConcreteTransfer
     {
         foreach ($productConcreteTransfer->getStocks() as $stockProductTransfer) {

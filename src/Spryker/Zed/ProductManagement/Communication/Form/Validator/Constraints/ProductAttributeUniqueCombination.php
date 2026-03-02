@@ -33,11 +33,6 @@ class ProductAttributeUniqueCombination extends Constraint
      */
     protected $productConcreteSuperAttributeFilterHelper;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface $productFace
-     * @param int $idProductAbstract
-     * @param \Spryker\Zed\ProductManagement\Communication\Helper\ProductConcreteSuperAttributeFilterHelperInterface $productConcreteSuperAttributeFilterHelper
-     */
     public function __construct(
         ProductManagementToProductInterface $productFace,
         int $idProductAbstract,
@@ -66,9 +61,6 @@ class ProductAttributeUniqueCombination extends Constraint
         return $this->productFacade;
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Communication\Helper\ProductConcreteSuperAttributeFilterHelperInterface
-     */
     public function getConcreteSuperAttributeFilterHelper(): ProductConcreteSuperAttributeFilterHelperInterface
     {
         return $this->productConcreteSuperAttributeFilterHelper;

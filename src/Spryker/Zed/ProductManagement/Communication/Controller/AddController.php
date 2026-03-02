@@ -199,11 +199,6 @@ class AddController extends AbstractController
         return $concreteProductCollection;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected function copyProductAbstractToProductConcrete(ProductAbstractTransfer $productAbstractTransfer): ProductConcreteTransfer
     {
         $productConcreteTransfer = (new ProductConcreteTransfer())

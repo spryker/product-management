@@ -518,12 +518,6 @@ class ProductFormTransferMapper implements ProductFormTransferMapperInterface
         return $attributes;
     }
 
-    /**
-     * @param array $formData
-     * @param int|null $idProduct
-     *
-     * @return array
-     */
     protected function getConcreteAttributes(array $formData, ?int $idProduct): array
     {
         if (
@@ -620,12 +614,6 @@ class ProductFormTransferMapper implements ProductFormTransferMapperInterface
         return $productConcreteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return void
-     */
     protected function setAbstractProductPricesToConcreteProduct(
         ProductConcreteTransfer $productConcreteTransfer,
         ProductAbstractTransfer $productAbstractTransfer
@@ -645,11 +633,6 @@ class ProductFormTransferMapper implements ProductFormTransferMapperInterface
         $productConcreteTransfer->setPrices($concreteProductPriceProductTransfers);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PriceProductTransfer $abstractProductPriceProductTransfer
-     *
-     * @return \Generated\Shared\Transfer\PriceProductDimensionTransfer
-     */
     protected function createPriceDimensionTransfer(
         PriceProductTransfer $abstractProductPriceProductTransfer
     ): PriceProductDimensionTransfer {
@@ -657,12 +640,6 @@ class ProductFormTransferMapper implements ProductFormTransferMapperInterface
             ->setType($abstractProductPriceProductTransfer->getPriceDimension()->getType());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param \Generated\Shared\Transfer\PriceProductTransfer $abstractProductPriceProductTransfer
-     *
-     * @return \Generated\Shared\Transfer\PriceProductTransfer
-     */
     protected function createPriceProductTransfer(
         ProductConcreteTransfer $productConcreteTransfer,
         PriceProductTransfer $abstractProductPriceProductTransfer

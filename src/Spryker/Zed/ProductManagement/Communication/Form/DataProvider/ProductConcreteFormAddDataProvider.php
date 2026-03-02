@@ -125,15 +125,6 @@ class ProductConcreteFormAddDataProvider
      */
     protected $productAttributeReader;
 
-    /**
-     * @param \Spryker\Zed\Stock\Persistence\StockQueryContainerInterface $stockQueryContainer
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface $productFacade
-     * @param \Spryker\Zed\ProductManagement\Communication\Form\DataProvider\LocaleProvider $localeProvider
-     * @param \Generated\Shared\Transfer\LocaleTransfer $currentLocale
-     * @param array $taxCollection
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductAttributeInterface $productAttributeFacade
-     * @param \Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReaderInterface|null $productAttributeReader
-     */
     public function __construct(
         StockQueryContainerInterface $stockQueryContainer,
         ProductManagementToProductInterface $productFacade,
@@ -324,12 +315,6 @@ class ProductConcreteFormAddDataProvider
         ];
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
-     *
-     * @return array
-     */
     protected function convertAbstractLocalizedAttributesToFormOptions(
         ?ProductAbstractTransfer $productAbstractTransfer = null,
         ?LocaleTransfer $localeTransfer = null
@@ -373,9 +358,6 @@ class ProductConcreteFormAddDataProvider
         return $this->attributeTransferCollection->get($keyToLocalize)->getKey();
     }
 
-    /**
-     * @return array
-     */
     protected function getAttributeTransferCollectionValues(): array
     {
         $values = [];
@@ -398,13 +380,6 @@ class ProductConcreteFormAddDataProvider
         return $values;
     }
 
-    /**
-     * @param array $values
-     * @param array $productAttributeKeys
-     * @param array $productAttributeValues
-     *
-     * @return array
-     */
     protected function getproductAttributeKeysValues(array $values, array $productAttributeKeys, array $productAttributeValues): array
     {
         foreach ($productAttributeKeys as $type) {
@@ -439,9 +414,6 @@ class ProductConcreteFormAddDataProvider
         return $values;
     }
 
-    /**
-     * @return \Everon\Component\Collection\Collection
-     */
     protected function getAttributeTransferCollection(): Collection
     {
         if ($this->productAttributeReader === null) {

@@ -11,9 +11,6 @@ use Generated\Shared\Transfer\CurrencyTransfer;
 
 interface ProductManagementToCurrencyInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\CurrencyTransfer
-     */
     public function getCurrent(): CurrencyTransfer;
 
     /**
@@ -21,8 +18,5 @@ interface ProductManagementToCurrencyInterface
      */
     public function getAllStoresWithCurrencies(): array;
 
-    /**
-     * @return \Generated\Shared\Transfer\CurrencyTransfer
-     */
     public function getDefaultCurrencyForCurrentStore(): CurrencyTransfer;
 }

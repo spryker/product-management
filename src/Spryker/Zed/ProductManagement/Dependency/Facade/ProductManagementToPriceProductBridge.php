@@ -32,9 +32,6 @@ class ProductManagementToPriceProductBridge implements ProductManagementToPriceP
         return $this->priceProductFacade->getPriceTypeValues();
     }
 
-    /**
-     * @return string
-     */
     public function getDefaultPriceTypeName(): string
     {
         return $this->priceProductFacade->getDefaultPriceTypeName();
@@ -51,9 +48,6 @@ class ProductManagementToPriceProductBridge implements ProductManagementToPriceP
         return $this->priceProductFacade->findProductConcretePrices($idProductConcrete, $idProductAbstract);
     }
 
-    /**
-     * @return string
-     */
     public function getPriceModeIdentifierForBothType(): string
     {
         return $this->priceProductFacade->getPriceModeIdentifierForBothType();

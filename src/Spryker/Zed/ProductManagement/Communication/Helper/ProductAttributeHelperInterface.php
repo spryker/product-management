@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\ProductAbstractTransfer;
 
 interface ProductAttributeHelperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return int
-     */
     public function getProductAbstractSuperAttributesCount(ProductAbstractTransfer $productAbstractTransfer): int;
 }

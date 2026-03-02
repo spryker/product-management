@@ -28,11 +28,6 @@ class ProductManagementProductCreateCest
      */
     protected const PAGE_BREADCRUMB = 'Catalog / Products / Create a Product';
 
-    /**
-     * @param \SprykerTest\Zed\ProductManagement\ProductManagementCommunicationTester $i
-     *
-     * @return void
-     */
     public function breadcrumbShouldBeVisibleWhenMoneyFormDoesNotHaveLocaleOption(ProductManagementCommunicationTester $i): void
     {
         $i->registerProductManagementStoreRelationFormTypePlugin();

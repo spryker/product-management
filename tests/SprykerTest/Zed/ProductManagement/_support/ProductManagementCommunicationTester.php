@@ -32,25 +32,16 @@ class ProductManagementCommunicationTester extends Actor
 {
     use _generated\ProductManagementCommunicationTesterActions;
 
-    /**
-     * @return void
-     */
     public function ensureProductAbstractTableIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->getProductAbstractQuery());
     }
 
-    /**
-     * @return \Spryker\Service\UtilNumber\UtilNumberServiceInterface
-     */
     public function getUtilService(): UtilNumberServiceInterface
     {
         return $this->getLocator()->utilNumber()->service();
     }
 
-    /**
-     * @return string
-     */
     public function getCurrentLocaleName(): string
     {
         return $this->getLocator()
@@ -60,17 +51,11 @@ class ProductManagementCommunicationTester extends Actor
             ->getLocaleName();
     }
 
-    /**
-     * @return \Orm\Zed\Product\Persistence\SpyProductAbstractQuery
-     */
     protected function getProductAbstractQuery(): SpyProductAbstractQuery
     {
         return SpyProductAbstractQuery::create();
     }
 
-    /**
-     * @return void
-     */
     public function registerProductManagementStoreRelationFormTypePlugin(): void
     {
         $this->setDependency(ProductManagementDependencyProvider::PLUGIN_STORE_RELATION_FORM_TYPE, function () {
@@ -78,9 +63,6 @@ class ProductManagementCommunicationTester extends Actor
         });
     }
 
-    /**
-     * @return void
-     */
     public function registerMoneyCollectionFormTypePluginWithoutLocale(): void
     {
         $this->setDependency(ProductManagementDependencyProvider::PLUGIN_MONEY_FORM_TYPE, function () {

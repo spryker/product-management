@@ -17,27 +17,16 @@ class ProductTableMock extends ProductTable
      */
     protected $searchTerm;
 
-    /**
-     * @param string $searchTerm
-     *
-     * @return void
-     */
     public function setSearchTerm(string $searchTerm): void
     {
         $this->searchTerm = $searchTerm;
     }
 
-    /**
-     * @return array
-     */
     public function fetchData(): array
     {
         return $this->init()->prepareData($this->config);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function getRequest(): Request
     {
         $request = new Request();

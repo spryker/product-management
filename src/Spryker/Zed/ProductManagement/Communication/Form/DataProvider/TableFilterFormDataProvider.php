@@ -22,9 +22,6 @@ class TableFilterFormDataProvider
      */
     public const OPTION_STORE_CHOICES = 'store_choices';
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToStoreFacadeInterface $storeFacade
-     */
     public function __construct(
         protected readonly ProductManagementToStoreFacadeInterface $storeFacade
     ) {

@@ -25,12 +25,6 @@ class ProductManagementToAvailabilityBridge implements ProductManagementToAvaila
         $this->availabilityFacade = $availabilityFacade;
     }
 
-    /**
-     * @param string $sku
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     *
-     * @return \Spryker\DecimalObject\Decimal
-     */
     public function calculateAvailabilityForProductWithStore(string $sku, StoreTransfer $storeTransfer): Decimal
     {
         return $this->availabilityFacade->calculateAvailabilityForProductWithStore($sku, $storeTransfer);

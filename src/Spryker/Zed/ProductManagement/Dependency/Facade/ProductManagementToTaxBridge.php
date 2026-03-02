@@ -26,17 +26,11 @@ class ProductManagementToTaxBridge implements ProductManagementToTaxInterface
         $this->taxFacade = $taxFacade;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\TaxRateCollectionTransfer
-     */
     public function getTaxRates(): TaxRateCollectionTransfer
     {
         return $this->taxFacade->getTaxRates();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\TaxSetCollectionTransfer
-     */
     public function getTaxSets(): TaxSetCollectionTransfer
     {
         return $this->taxFacade->getTaxSets();

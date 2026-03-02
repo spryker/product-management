@@ -43,10 +43,6 @@ EOD;
      */
     protected $productFacade;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\ProductManagementConfig $config
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface $productFacade
-     */
     public function __construct(
         ProductManagementConfig $config,
         ProductManagementToProductInterface $productFacade

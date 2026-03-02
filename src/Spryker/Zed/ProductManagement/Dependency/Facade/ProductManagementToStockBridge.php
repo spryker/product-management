@@ -22,9 +22,6 @@ class ProductManagementToStockBridge implements ProductManagementToStockInterfac
         $this->stockFacade = $stockFacade;
     }
 
-    /**
-     * @return array
-     */
     public function getWarehouseToStoreMapping(): array
     {
         return $this->stockFacade->getWarehouseToStoreMapping();

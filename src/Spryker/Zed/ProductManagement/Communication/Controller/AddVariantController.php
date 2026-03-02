@@ -130,13 +130,6 @@ class AddVariantController extends AbstractController
         );
     }
 
-    /**
-     * @param int $idProduct
-     * @param string $type
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function createRedirectResponseAfterAdd(int $idProduct, string $type, Request $request): RedirectResponse
     {
         $params = $request->query->all();

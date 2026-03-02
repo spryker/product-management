@@ -23,10 +23,6 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
      */
     protected $productQueryContainer;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface $productFacade
-     * @param \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface $productQueryContainer
-     */
     public function __construct(
         ProductManagementToProductInterface $productFacade,
         ProductQueryContainerInterface $productQueryContainer
@@ -35,11 +31,6 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
         $this->productQueryContainer = $productQueryContainer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return int
-     */
     public function getProductAbstractSuperAttributesCount(ProductAbstractTransfer $productAbstractTransfer): int
     {
         $combinedAbstractAttributeKeys = $this->productFacade

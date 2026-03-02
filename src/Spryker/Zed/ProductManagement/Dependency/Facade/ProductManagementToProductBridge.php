@@ -47,21 +47,11 @@ class ProductManagementToProductBridge implements ProductManagementToProductInte
         return $this->productFacade->findProductAttributeKey($key);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAttributeKeyTransfer $productAttributeKeyTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAttributeKeyTransfer
-     */
     public function createProductAttributeKey(ProductAttributeKeyTransfer $productAttributeKeyTransfer): ProductAttributeKeyTransfer
     {
         return $this->productFacade->createProductAttributeKey($productAttributeKeyTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAttributeKeyTransfer $productAttributeKeyTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAttributeKeyTransfer
-     */
     public function updateProductAttributeKey(ProductAttributeKeyTransfer $productAttributeKeyTransfer): ProductAttributeKeyTransfer
     {
         return $this->productFacade->updateProductAttributeKey($productAttributeKeyTransfer);
@@ -170,12 +160,6 @@ class ProductManagementToProductBridge implements ProductManagementToProductInte
         return $this->productFacade->generateVariants($productAbstractTransfer, $attributeCollection);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
-     *
-     * @return array
-     */
     public function getCombinedAbstractAttributeKeys(
         ProductAbstractTransfer $productAbstractTransfer,
         ?LocaleTransfer $localeTransfer = null
@@ -183,12 +167,6 @@ class ProductManagementToProductBridge implements ProductManagementToProductInte
         return $this->productFacade->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
-     *
-     * @return array
-     */
     public function getCombinedConcreteAttributes(
         ProductConcreteTransfer $productConcreteTransfer,
         ?LocaleTransfer $localeTransfer = null
@@ -226,12 +204,6 @@ class ProductManagementToProductBridge implements ProductManagementToProductInte
         return $this->productFacade->findProductConcreteIdBySku($sku);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     *
-     * @return string
-     */
     public function generateProductConcreteSku(
         ProductAbstractTransfer $productAbstractTransfer,
         ProductConcreteTransfer $productConcreteTransfer

@@ -29,10 +29,6 @@ class ProductMoneyCollectionDataProvider
      */
     protected $priceFacade;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToCurrencyInterface $currencyFacade
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToPriceProductInterface $priceProductFacade
-     */
     public function __construct(
         ProductManagementToCurrencyInterface $currencyFacade,
         ProductManagementToPriceProductInterface $priceProductFacade

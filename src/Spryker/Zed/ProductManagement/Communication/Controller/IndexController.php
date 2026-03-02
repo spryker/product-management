@@ -61,11 +61,6 @@ class IndexController extends AbstractController
         );
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Generated\Shared\Transfer\ProductTableCriteriaTransfer
-     */
     protected function handleTableFilter(Request $request): ProductTableCriteriaTransfer
     {
         $productTableCriteriaTransfer = (new ProductTableCriteriaTransfer())->fromArray($request->query->all(), true);
@@ -75,11 +70,6 @@ class IndexController extends AbstractController
         return $tableFilterForm->handleRequest($request)->getData();
     }
 
-    /**
-     * @param array $viewData
-     *
-     * @return array
-     */
     protected function executeProductAbstractListActionViewDataExpanderPlugins(array $viewData): array
     {
         foreach ($this->getFactory()->getProductAbstractListActionViewDataExpanderPlugins() as $productAbstractListActionViewDataExpanderPlugin) {

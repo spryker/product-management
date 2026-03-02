@@ -9,10 +9,5 @@ namespace Spryker\Zed\ProductManagement\Communication\PluginExecutor;
 
 interface ProductConcreteEditViewExpanderPluginExecutorInterface
 {
-    /**
-     * @param array $viewData
-     *
-     * @return array
-     */
     public function expandEditVariantViewData(array $viewData): array;
 }

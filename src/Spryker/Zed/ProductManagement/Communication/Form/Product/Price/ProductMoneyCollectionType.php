@@ -90,11 +90,6 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         parent::buildForm($builder, array_replace_recursive($defaultOptions, $options));
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -104,9 +99,6 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'product_money_collection';
@@ -190,13 +182,6 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         $view->vars = array_merge($additionalParameters, $view->vars);
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormView $productMoneyTypeFormView
-     * @param \Symfony\Component\Form\FormView $moneyValueFormView
-     * @param array $additionalParameters
-     *
-     * @return array
-     */
     protected function buildAdditionalParameters(FormView $productMoneyTypeFormView, FormView $moneyValueFormView, array $additionalParameters): array
     {
         $additionalParameters[static::PRICE_PRODUCT_VOLUME_KEY] = $additionalParameters[static::PRICE_PRODUCT_VOLUME_KEY] ?? [];
@@ -205,13 +190,6 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         return $additionalParameters;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormView $productMoneyTypeFormView
-     * @param \Symfony\Component\Form\FormView $moneyValueFormView
-     * @param array $volumePrices
-     *
-     * @return array
-     */
     protected function buildVolumePriceList(FormView $productMoneyTypeFormView, FormView $moneyValueFormView, array $volumePrices): array
     {
         $storeName = $moneyValueFormView->vars['store_name'];
@@ -244,11 +222,6 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         return $volumePrices;
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormView $productMoneyTypeFormView
-     *
-     * @return bool
-     */
     protected function isVolumePriceNotApplicable(FormView $productMoneyTypeFormView): bool
     {
         $priceProductTransfer = $this->extractPriceProductTransfer($productMoneyTypeFormView);
@@ -411,21 +384,11 @@ class ProductMoneyCollectionType extends AbstractCollectionType
         return $productMoneyTypeFormView->vars['price_type'];
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormView $moneyValueFormView
-     *
-     * @return \Generated\Shared\Transfer\MoneyValueTransfer
-     */
     protected function extractMoneyValueTransfer(FormView $moneyValueFormView): MoneyValueTransfer
     {
         return $moneyValueFormView->vars['value'];
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormView $productMoneyTypeFormView
-     *
-     * @return \Generated\Shared\Transfer\PriceProductTransfer
-     */
     protected function extractPriceProductTransfer(FormView $productMoneyTypeFormView): PriceProductTransfer
     {
         return $productMoneyTypeFormView->vars['value'];

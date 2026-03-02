@@ -25,21 +25,11 @@ class ProductManagementToProductImageBridge implements ProductManagementToProduc
         $this->productImageFacade = $productImageFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductImageTransfer $productImageTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductImageTransfer
-     */
     public function saveProductImage(ProductImageTransfer $productImageTransfer): ProductImageTransfer
     {
         return $this->productImageFacade->saveProductImage($productImageTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductImageSetTransfer $productImageSetTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductImageSetTransfer
-     */
     public function saveProductImageSet(ProductImageSetTransfer $productImageSetTransfer): ProductImageSetTransfer
     {
         return $this->productImageFacade->saveProductImageSet($productImageSetTransfer);

@@ -18,9 +18,6 @@ class LocaleProvider
      */
     protected $localeFacade;
 
-    /**
-     * @param \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToLocaleInterface $localeFacade
-     */
     public function __construct(ProductManagementToLocaleInterface $localeFacade)
     {
         $this->localeFacade = $localeFacade;

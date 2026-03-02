@@ -56,9 +56,6 @@ class ProductManagementPersistenceFactory extends AbstractPersistenceFactory
         return SpyProductManagementAttributeValueTranslationQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Persistence\Expander\ProductAbstractQueryExpanderInterface
-     */
     public function createProductAbstractQueryExpander(): ProductAbstractQueryExpanderInterface
     {
         return new ProductAbstractQueryExpander(
@@ -74,9 +71,6 @@ class ProductManagementPersistenceFactory extends AbstractPersistenceFactory
         return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_TABLE_QUERY_CRITERIA_EXPANDER);
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductInterface
-     */
     public function getProductFacade(): ProductManagementToProductInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_PRODUCT);

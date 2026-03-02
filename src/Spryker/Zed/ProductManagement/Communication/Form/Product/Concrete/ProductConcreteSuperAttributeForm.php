@@ -45,11 +45,6 @@ class ProductConcreteSuperAttributeForm extends AbstractType
      */
     public const OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_TRANSFER = 'OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_TRANSFER';
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_TRANSFER);

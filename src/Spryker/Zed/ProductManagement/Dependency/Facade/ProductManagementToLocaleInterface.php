@@ -11,9 +11,6 @@ use Generated\Shared\Transfer\LocaleTransfer;
 
 interface ProductManagementToLocaleInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\LocaleTransfer
-     */
     public function getCurrentLocale(): LocaleTransfer;
 
     /**

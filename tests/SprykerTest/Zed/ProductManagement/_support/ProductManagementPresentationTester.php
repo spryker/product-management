@@ -30,9 +30,6 @@ class ProductManagementPresentationTester extends Actor
 {
     use _generated\ProductManagementPresentationTesterActions;
 
-    /**
-     * @return void
-     */
     public function registerMoneyCollectionFormTypePlugin(): void
     {
         $this->setDependency(ProductManagementDependencyProvider::PLUGIN_MONEY_FORM_TYPE, function () {
@@ -40,9 +37,6 @@ class ProductManagementPresentationTester extends Actor
         });
     }
 
-    /**
-     * @return void
-     */
     public function registerProductManagementStoreRelationFormTypePlugin(): void
     {
         $this->setDependency(ProductManagementDependencyProvider::PLUGIN_STORE_RELATION_FORM_TYPE, function () {

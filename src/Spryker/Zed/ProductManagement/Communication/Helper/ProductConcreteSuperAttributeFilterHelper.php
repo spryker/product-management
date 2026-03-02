@@ -11,11 +11,6 @@ use Spryker\Zed\ProductManagement\Communication\Form\Product\Concrete\ProductCon
 
 class ProductConcreteSuperAttributeFilterHelper implements ProductConcreteSuperAttributeFilterHelperInterface
 {
-    /**
-     * @param array $submittedAttributes
-     *
-     * @return array
-     */
     public function getTransformedSubmittedSuperAttributes(array $submittedAttributes): array
     {
         $attributes = [];

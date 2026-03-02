@@ -12,18 +12,8 @@ use Generated\Shared\Transfer\ProductImageTransfer;
 
 interface ProductManagementToProductImageInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductImageTransfer $productImageTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductImageTransfer
-     */
     public function saveProductImage(ProductImageTransfer $productImageTransfer): ProductImageTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductImageSetTransfer $productImageSetTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductImageSetTransfer
-     */
     public function saveProductImageSet(ProductImageSetTransfer $productImageSetTransfer): ProductImageSetTransfer;
 
     /**

@@ -319,11 +319,6 @@ class BundledProductTable extends AbstractTable
         );
     }
 
-    /**
-     * @param \Orm\Zed\Product\Persistence\SpyProduct $productConcreteEntity
-     *
-     * @return \Spryker\DecimalObject\Decimal
-     */
     protected function getAvailability(SpyProduct $productConcreteEntity): Decimal
     {
         if (!$productConcreteEntity->getIsNeverOutOfStock()) {

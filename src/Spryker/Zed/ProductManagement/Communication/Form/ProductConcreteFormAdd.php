@@ -86,11 +86,6 @@ class ProductConcreteFormAdd extends ProductConcreteFormEdit
         $this->executeProductConcreteFormExpanderPlugins($builder, $options);
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -222,12 +217,6 @@ class ProductConcreteFormAdd extends ProductConcreteFormEdit
         );
     }
 
-    /**
-     * @param array $validationGroups
-     * @param \Symfony\Component\Form\FormInterface $form
-     *
-     * @return array
-     */
     protected function prepareDefaultsValidationGroups(array $validationGroups, FormInterface $form): array
     {
         $validationGroupsPriceSourceKey = array_search(static::VALIDATION_GROUP_PRICE_SOURCE, $validationGroups, true);

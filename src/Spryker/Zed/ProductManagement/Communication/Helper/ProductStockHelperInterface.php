@@ -19,10 +19,5 @@ interface ProductStockHelperInterface
      */
     public function addMissingStockTypes(ProductConcreteTransfer $productConcreteTransfer, array $stockTypeEntities): ProductConcreteTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function trimStockQuantities(ProductConcreteTransfer $productConcreteTransfer): ProductConcreteTransfer;
 }

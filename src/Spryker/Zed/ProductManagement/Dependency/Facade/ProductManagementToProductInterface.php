@@ -28,18 +28,8 @@ interface ProductManagementToProductInterface
      */
     public function findProductAttributeKey($key): ?ProductAttributeKeyTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAttributeKeyTransfer $productAttributeKeyTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAttributeKeyTransfer
-     */
     public function createProductAttributeKey(ProductAttributeKeyTransfer $productAttributeKeyTransfer): ProductAttributeKeyTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAttributeKeyTransfer $productAttributeKeyTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAttributeKeyTransfer
-     */
     public function updateProductAttributeKey(ProductAttributeKeyTransfer $productAttributeKeyTransfer): ProductAttributeKeyTransfer;
 
     /**
@@ -124,23 +114,11 @@ interface ProductManagementToProductInterface
         array $attributeCollection
     ): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
-     *
-     * @return array
-     */
     public function getCombinedAbstractAttributeKeys(
         ProductAbstractTransfer $productAbstractTransfer,
         ?LocaleTransfer $localeTransfer = null
     ): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
-     *
-     * @return array
-     */
     public function getCombinedConcreteAttributes(
         ProductConcreteTransfer $productConcreteTransfer,
         ?LocaleTransfer $localeTransfer = null
@@ -167,12 +145,6 @@ interface ProductManagementToProductInterface
      */
     public function findProductConcreteIdBySku($sku): ?int;
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     *
-     * @return string
-     */
     public function generateProductConcreteSku(
         ProductAbstractTransfer $productAbstractTransfer,
         ProductConcreteTransfer $productConcreteTransfer

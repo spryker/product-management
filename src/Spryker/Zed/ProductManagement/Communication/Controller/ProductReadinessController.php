@@ -32,11 +32,6 @@ class ProductReadinessController extends AbstractController
      */
     public const PARAM_ID_PRODUCT = 'id-product';
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
-     */
     public function indexAction(Request $request): array|RedirectResponse
     {
         $idProductAbstract = $this->castId($request->get(

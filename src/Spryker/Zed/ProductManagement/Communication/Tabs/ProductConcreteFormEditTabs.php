@@ -158,11 +158,6 @@ class ProductConcreteFormEditTabs extends ProductFormEditTabs
         return $this;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
-     *
-     * @return \Generated\Shared\Transfer\TabsViewTransfer
-     */
     protected function executeExpanderPlugins(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
         foreach ($this->productConcreteFormEditTabsExpanderPlugins as $concreteFormEditTabsExpanderPlugin) {

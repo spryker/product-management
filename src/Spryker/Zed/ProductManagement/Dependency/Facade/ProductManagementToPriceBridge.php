@@ -22,25 +22,16 @@ class ProductManagementToPriceBridge implements ProductManagementToPriceInterfac
         $this->priceFacade = $priceFacade;
     }
 
-    /**
-     * @return string
-     */
     public function getNetPriceModeIdentifier(): string
     {
         return $this->priceFacade->getNetPriceModeIdentifier();
     }
 
-    /**
-     * @return string
-     */
     public function getGrossPriceModeIdentifier(): string
     {
         return $this->priceFacade->getGrossPriceModeIdentifier();
     }
 
-    /**
-     * @return string
-     */
     public function getDefaultPriceMode(): string
     {
         return $this->priceFacade->getDefaultPriceMode();

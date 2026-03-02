@@ -98,9 +98,6 @@ class ProductManagementBusinessFactory extends AbstractBusinessFactory
         return $this->getLocaleFacade()->getCurrentLocale();
     }
 
-    /**
-     * @return \Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToStoreFacadeInterface
-     */
     public function getStoreFacade(): ProductManagementToStoreFacadeInterface
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::FACADE_STORE);

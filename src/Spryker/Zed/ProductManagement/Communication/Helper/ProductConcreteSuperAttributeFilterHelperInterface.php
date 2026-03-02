@@ -9,10 +9,5 @@ namespace Spryker\Zed\ProductManagement\Communication\Helper;
 
 interface ProductConcreteSuperAttributeFilterHelperInterface
 {
-    /**
-     * @param array $submittedAttributes
-     *
-     * @return array
-     */
     public function getTransformedSubmittedSuperAttributes(array $submittedAttributes): array;
 }
