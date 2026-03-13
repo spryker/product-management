@@ -30,10 +30,9 @@ class ProductManagementProductConcreteViewCest
 
     public function breadcrumbIsVisible(ProductManagementPresentationTester $i): void
     {
-        $i->registerMoneyCollectionFormTypePlugin();
-
         $i->amOnPage(ProductManagementProductListPage::URL);
         $i->clickDataTableViewButton();
+        $i->waitForElement('#product-variant-table_wrapper .column-actions', 30);
         $i->clickDataTableViewButton(1, 'product-variant-table_wrapper');
 
         $i->seeBreadcrumbNavigation('Catalog / Products / View Concrete Product');

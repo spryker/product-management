@@ -36,7 +36,7 @@ class ProductManagementProductEditCest
 
         $i->amOnPage(ProductManagementProductListPage::URL);
 
-        $i->waitForElementVisible('.dataTables_scrollBody');
+        $i->waitForElementVisible('.dt-container');
 
         $i->clickDataTableEditButton();
         $i->seeBreadcrumbNavigation('Catalog / Products / Edit Product');
@@ -50,7 +50,7 @@ class ProductManagementProductEditCest
 
         $i->amOnPage(ProductManagementProductListPage::URL);
 
-        $i->waitForElementVisible('.dataTables_scrollBody');
+        $i->waitForElementVisible('.dt-container');
 
         $i->clickDataTableEditButton();
         $i->seeBreadcrumbNavigation('Catalog / Products / Edit Product');
