@@ -257,6 +257,10 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
      */
     public const PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER';
 
+    public const string PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_EXPANDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_EXPANDER';
+
+    public const string PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_RESOLVER_EXPANDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_RESOLVER_EXPANDER';
+
     /**
      * @var string
      */
@@ -268,9 +272,16 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
     public const PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER = 'PLUGINS_PRODUCT_CONCRETE_READINESS_PROVIDER';
 
     /**
+     * @deprecated Use PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER_WITH_PRIORITY instead.
+     *
      * @var string
      */
     public const PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER = 'PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER';
+
+    /**
+     * @var string
+     */
+    public const PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER_WITH_PRIORITY = 'PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER_WITH_PRIORITY';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -442,10 +453,13 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         $container = $this->addProductVariantTableActionExpanderPlugins($container);
         $container = $this->addProductAbstractTransferMapperPlugins($container);
         $container = $this->addProductAbstractFormDataProviderExpanderPlugins($container);
+        $container = $this->addProductAbstractFormOptionsExpanderPlugins($container);
+        $container = $this->addProductAbstractFormOptionsResolverExpanderPlugins($container);
         $container = $this->addTranslatorFacade($container);
         $container = $this->addProductAbstractReadinessProviderPlugins($container);
         $container = $this->addProductConcreteReadinessProviderPlugins($container);
         $container = $this->addProductAbstractFormTabContentProviderPlugins($container);
+        $container = $this->addProductAbstractFormTabContentProviderWithPriorityPlugins($container);
 
         return $container;
     }
@@ -920,6 +934,40 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
+    protected function addProductAbstractFormOptionsExpanderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_EXPANDER, function (): array {
+            return $this->getProductAbstractFormOptionsExpanderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsExpanderPluginInterface>
+     */
+    protected function getProductAbstractFormOptionsExpanderPlugins(): array
+    {
+        return [];
+    }
+
+    protected function addProductAbstractFormOptionsResolverExpanderPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_RESOLVER_EXPANDER, function (): array {
+            return $this->getProductAbstractFormOptionsResolverExpanderPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsResolverExpanderPluginInterface>
+     */
+    protected function getProductAbstractFormOptionsResolverExpanderPlugins(): array
+    {
+        return [];
+    }
+
     protected function addTranslatorFacade(Container $container): Container
     {
         $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
@@ -963,6 +1011,9 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
         return [];
     }
 
+    /**
+     * @deprecated Use addProductAbstractFormTabContentProviderWithPriorityPlugins() instead.
+     */
     protected function addProductAbstractFormTabContentProviderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER, function (): array {
@@ -973,9 +1024,28 @@ class ProductManagementDependencyProvider extends AbstractBundleDependencyProvid
     }
 
     /**
+     * @deprecated Use getProductAbstractFormTabContentProviderWithPriorityPlugins() instead.
+     *
      * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderPluginInterface>
      */
     protected function getProductAbstractFormTabContentProviderPlugins(): array
+    {
+        return [];
+    }
+
+    protected function addProductAbstractFormTabContentProviderWithPriorityPlugins(Container $container): Container
+    {
+        $container->set(static::PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER_WITH_PRIORITY, function (): array {
+            return $this->getProductAbstractFormTabContentProviderWithPriorityPlugins();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderWithPriorityPluginInterface>
+     */
+    protected function getProductAbstractFormTabContentProviderWithPriorityPlugins(): array
     {
         return [];
     }

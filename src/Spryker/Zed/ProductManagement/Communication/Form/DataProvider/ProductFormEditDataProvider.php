@@ -22,6 +22,9 @@ use Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductIn
 use Spryker\Zed\ProductManagement\Persistence\ProductManagementQueryContainerInterface;
 use Spryker\Zed\Stock\Persistence\StockQueryContainerInterface;
 
+/**
+ * @method \Spryker\Zed\ProductManagement\Communication\ProductManagementCommunicationFactory getFactory()
+ */
 class ProductFormEditDataProvider extends AbstractProductFormDataProvider
 {
     /**
@@ -42,6 +45,7 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
      * @param array $taxCollection
      * @param string $imageUrlPrefix
      * @param array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormDataProviderExpanderPluginInterface> $productAbstractFormDataProviderExpanderPlugins
+     * @param array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsExpanderPluginInterface> $productAbstractFormOptionsExpanderPlugins
      */
     public function __construct(
         CategoryQueryContainerInterface $categoryQueryContainer,
@@ -56,6 +60,7 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
         array $taxCollection,
         $imageUrlPrefix,
         array $productAbstractFormDataProviderExpanderPlugins = [],
+        array $productAbstractFormOptionsExpanderPlugins = [],
     ) {
         parent::__construct(
             $categoryQueryContainer,
@@ -71,7 +76,20 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
             $imageUrlPrefix,
             null,
             $productAbstractFormDataProviderExpanderPlugins,
+            $productAbstractFormOptionsExpanderPlugins,
         );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     *
+     * @return array<string, mixed>
+     */
+    public function getOptions(?ProductAbstractTransfer $productAbstractTransfer = null)
+    {
+        $formOptions = parent::getOptions($productAbstractTransfer);
+
+        return $this->expandFormOptions($formOptions, $productAbstractTransfer);
     }
 
     /**
@@ -265,5 +283,20 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
         }
 
         return false;
+    }
+
+    /**
+     * @param array<string, mixed> $formOptions
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     *
+     * @return array<string, mixed>
+     */
+    protected function expandFormOptions(array $formOptions, ?ProductAbstractTransfer $productAbstractTransfer = null): array
+    {
+        foreach ($this->productAbstractFormOptionsExpanderPlugins as $productAbstractFormOptionsExpanderPlugin) {
+            $formOptions = $productAbstractFormOptionsExpanderPlugin->expand($formOptions, $productAbstractTransfer ?? new ProductAbstractTransfer());
+        }
+
+        return $formOptions;
     }
 }

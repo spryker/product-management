@@ -39,6 +39,7 @@
         'submit_title': submit_title,
         'type' : type,
         'tabContents': tabContents | default([]),
+        'useTabContentProviders': useTabContentProviders is defined ? useTabContentProviders : false
     }) }}
 
     {{ form_end(form) }}

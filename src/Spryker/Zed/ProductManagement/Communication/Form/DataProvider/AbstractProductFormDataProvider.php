@@ -189,6 +189,11 @@ class AbstractProductFormDataProvider
     protected $productAbstractFormDataProviderExpanderPlugins = [];
 
     /**
+     * @var array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsExpanderPluginInterface>
+     */
+    protected array $productAbstractFormOptionsExpanderPlugins = [];
+
+    /**
      * @param \Spryker\Zed\Category\Persistence\CategoryQueryContainerInterface $categoryQueryContainer
      * @param \Spryker\Zed\ProductManagement\Persistence\ProductManagementQueryContainerInterface $productManagementQueryContainer
      * @param \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface $productQueryContainer
@@ -202,6 +207,7 @@ class AbstractProductFormDataProvider
      * @param string $imageUrlPrefix
      * @param \Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReaderInterface|null $productAttributeReader
      * @param array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormDataProviderExpanderPluginInterface> $productAbstractFormDataProviderExpanderPlugins
+     * @param array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsExpanderPluginInterface> $productAbstractFormOptionsExpanderPlugins
      */
     public function __construct(
         CategoryQueryContainerInterface $categoryQueryContainer,
@@ -217,6 +223,7 @@ class AbstractProductFormDataProvider
         $imageUrlPrefix,
         ?ProductAttributeReaderInterface $productAttributeReader = null,
         array $productAbstractFormDataProviderExpanderPlugins = [],
+        array $productAbstractFormOptionsExpanderPlugins = [],
     ) {
         $this->categoryQueryContainer = $categoryQueryContainer;
         $this->productManagementQueryContainer = $productManagementQueryContainer;
@@ -231,6 +238,7 @@ class AbstractProductFormDataProvider
         $this->imageUrlPrefix = $imageUrlPrefix;
         $this->productAttributeReader = $productAttributeReader;
         $this->productAbstractFormDataProviderExpanderPlugins = $productAbstractFormDataProviderExpanderPlugins;
+        $this->productAbstractFormOptionsExpanderPlugins = $productAbstractFormOptionsExpanderPlugins;
         $this->attributeTransferCollection = $this->getAttributeTransferCollection();
     }
 

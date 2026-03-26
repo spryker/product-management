@@ -1,0 +1,5 @@
+{% if currentProduct is defined %}
+    {% include '@ProductApprovalGui/Partials/approval_status_label.twig' ignore missing with {
+        product: currentProduct,
+    } only %}
+{% endif %}

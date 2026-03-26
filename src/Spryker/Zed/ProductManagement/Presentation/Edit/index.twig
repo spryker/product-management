@@ -41,6 +41,7 @@
             'tablesByPriceType': tablesByPriceType | default([]),
             'merchant': merchant | default(),
             'tabContents': tabContents | default([]),
+            'useTabContentProviders': useTabContentProviders is defined ? useTabContentProviders : true
         }) }}
 
     {{ form_end(form) }}

@@ -137,6 +137,7 @@ class EditController extends AddController
             ->provideTabContents($productAbstractTransfer);
 
         $viewData['tabContents'] = $tabContents;
+        $viewData['useTabContentProviders'] = $this->getFactory()->getConfig()->isTabContentProviderEnabled();
 
         return $this->viewResponse($viewData);
     }

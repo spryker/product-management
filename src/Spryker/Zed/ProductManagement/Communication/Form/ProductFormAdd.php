@@ -208,6 +208,7 @@ class ProductFormAdd extends AbstractType
 
         $this->setRequired($resolver);
         $this->setDefaults($resolver);
+        $this->executeProductAbstractFormOptionsResolverExpanderPlugins($resolver);
     }
 
     /**
@@ -838,6 +839,13 @@ class ProductFormAdd extends AbstractType
     protected function prepareDefaultsValidationGroups(array $validationGroups, FormInterface $form): array
     {
         return $validationGroups;
+    }
+
+    protected function executeProductAbstractFormOptionsResolverExpanderPlugins(OptionsResolver $resolver): void
+    {
+        foreach ($this->getFactory()->getProductAbstractFormOptionsResolverExpanderPlugins() as $plugin) {
+            $plugin->expand($resolver);
+        }
     }
 
     /**

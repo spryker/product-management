@@ -227,4 +227,8 @@ class ProductConcreteFormAdd extends ProductConcreteFormEdit
 
         return $validationGroups;
     }
+
+    protected function executeProductAbstractFormOptionsResolverExpanderPlugins(OptionsResolver $resolver): void
+    {
+    }
 }

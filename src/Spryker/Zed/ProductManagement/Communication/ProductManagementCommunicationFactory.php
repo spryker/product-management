@@ -39,6 +39,14 @@ use Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReader;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductAttributeReaderInterface;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReader;
 use Spryker\Zed\ProductManagement\Communication\Reader\ProductConcreteReadinessReaderInterface;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabDescriptionContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabInformationContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabNewFromContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabNewToContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabProductAbstractTypeContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabProductContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabSkuContentProvider;
+use Spryker\Zed\ProductManagement\Communication\TabContentProvider\GeneralTabStoreContentProvider;
 use Spryker\Zed\ProductManagement\Communication\Table\BundledProductTable;
 use Spryker\Zed\ProductManagement\Communication\Table\ProductGroupTable;
 use Spryker\Zed\ProductManagement\Communication\Table\ProductTable;
@@ -128,6 +136,7 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
             $this->getConfig()->getImageUrlPrefix(),
             $this->createProductAttributeReader(),
             $this->getProductAbstractFormDataProviderExpanderPlugins(),
+            $this->getProductAbstractFormOptionsExpanderPlugins(),
         );
     }
 
@@ -149,6 +158,7 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
             $this->getProductTaxCollection(),
             $this->getConfig()->getImageUrlPrefix(),
             $this->getProductAbstractFormDataProviderExpanderPlugins(),
+            $this->getProductAbstractFormOptionsExpanderPlugins(),
         );
     }
 
@@ -224,6 +234,22 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
     public function getProductAbstractFormDataProviderExpanderPlugins(): array
     {
         return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_FORM_DATA_PROVIDER_EXPANDER);
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsExpanderPluginInterface>
+     */
+    public function getProductAbstractFormOptionsExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_EXPANDER);
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormOptionsResolverExpanderPluginInterface>
+     */
+    public function getProductAbstractFormOptionsResolverExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_FORM_OPTIONS_RESOLVER_EXPANDER);
     }
 
     /**
@@ -786,11 +812,81 @@ class ProductManagementCommunicationFactory extends AbstractCommunicationFactory
     public function createProductAbstractFormTabDataProviderPluginExecutor(): ProductAbstractFormTabDataProviderPluginExecutor
     {
         return new ProductAbstractFormTabDataProviderPluginExecutor(
+            $this->createGeneralTabContentProviders(),
+            $this->getProductAbstractFormTabContentProviderWithPriorityPlugins(),
             $this->getProductAbstractFormTabContentProviderPlugins(),
+            $this->getConfig()->isTabContentProviderEnabled(),
         );
     }
 
     /**
+     * @return array<\Spryker\Zed\ProductManagement\Communication\TabContentProvider\ProductAbstractFormTabContentProviderInterface>
+     */
+    public function createGeneralTabContentProviders(): array
+    {
+        return [
+            $this->createGeneralTabInformationContentProvider(),
+            $this->createGeneralTabProductContentProvider(),
+            $this->createGeneralTabStoreContentProvider(),
+            $this->createGeneralTabSkuContentProvider(),
+            $this->createGeneralTabDescriptionContentProvider(),
+            $this->createGeneralTabNewFromContentProvider(),
+            $this->createGeneralTabNewToContentProvider(),
+            $this->createGeneralTabProductAbstractTypeContentProvider(),
+        ];
+    }
+
+    public function createGeneralTabInformationContentProvider(): GeneralTabInformationContentProvider
+    {
+        return new GeneralTabInformationContentProvider();
+    }
+
+    public function createGeneralTabProductContentProvider(): GeneralTabProductContentProvider
+    {
+        return new GeneralTabProductContentProvider();
+    }
+
+    public function createGeneralTabStoreContentProvider(): GeneralTabStoreContentProvider
+    {
+        return new GeneralTabStoreContentProvider();
+    }
+
+    public function createGeneralTabSkuContentProvider(): GeneralTabSkuContentProvider
+    {
+        return new GeneralTabSkuContentProvider();
+    }
+
+    public function createGeneralTabDescriptionContentProvider(): GeneralTabDescriptionContentProvider
+    {
+        return new GeneralTabDescriptionContentProvider();
+    }
+
+    public function createGeneralTabNewFromContentProvider(): GeneralTabNewFromContentProvider
+    {
+        return new GeneralTabNewFromContentProvider();
+    }
+
+    public function createGeneralTabNewToContentProvider(): GeneralTabNewToContentProvider
+    {
+        return new GeneralTabNewToContentProvider();
+    }
+
+    public function createGeneralTabProductAbstractTypeContentProvider(): GeneralTabProductAbstractTypeContentProvider
+    {
+        return new GeneralTabProductAbstractTypeContentProvider();
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderWithPriorityPluginInterface>
+     */
+    public function getProductAbstractFormTabContentProviderWithPriorityPlugins(): array
+    {
+        return $this->getProvidedDependency(ProductManagementDependencyProvider::PLUGINS_PRODUCT_ABSTRACT_FORM_TAB_CONTENT_PROVIDER_WITH_PRIORITY);
+    }
+
+    /**
+     * @deprecated Use getProductAbstractFormTabContentProviderWithPriorityPlugins() instead.
+     *
      * @return array<\Spryker\Zed\ProductManagementExtension\Dependency\Plugin\ProductAbstractFormTabContentProviderPluginInterface>
      */
     public function getProductAbstractFormTabContentProviderPlugins(): array

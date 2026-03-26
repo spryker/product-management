@@ -454,6 +454,10 @@ class ProductConcreteFormEdit extends ProductFormAdd
         return $superAttributes;
     }
 
+    protected function executeProductAbstractFormOptionsResolverExpanderPlugins(OptionsResolver $resolver): void
+    {
+    }
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options

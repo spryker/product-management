@@ -103,6 +103,7 @@ class AddController extends AbstractController
             'productFormAddTabs' => $this->getFactory()->createProductFormAddTabs()->createView(),
             'type' => $type,
             'tabContents' => $tabContents,
+            'useTabContentProviders' => $this->getFactory()->getConfig()->isTabContentProviderEnabled(),
         ]);
     }
 

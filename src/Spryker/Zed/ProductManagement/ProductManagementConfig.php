@@ -110,4 +110,18 @@ class ProductManagementConfig extends AbstractBundleConfig
     {
         return false;
     }
+
+    /**
+     * Specification:
+     * - Returns whether the tab content is rendered via priority-aware content providers.
+     * - Defaults to false. Set to true to enable and replace legacy hardcoded block rendering for projects that override individual Twig blocks.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isTabContentProviderEnabled(): bool
+    {
+        return false;
+    }
 }

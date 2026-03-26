@@ -1,93 +1,101 @@
 {# @var locale \Generated\Shared\Transfer\LocaleTransfer #}
 
 {% block body %}
-    {% block information %}
-        <div class="well">
-            {% apply trans|raw %}
-                <h3>{{ 'Add General Information' | trans }}</h3>
-                <p>{{ 'Below the name and description for your product can be edited for different locales (in different languages).' | trans }}</p>
-                <p>
-                    <i>{{ 'Note: The SKU prefix, just like the SKUs of your product variants, are not editable after saving anymore.' | trans }}</i>
-                </p>
-            {% endapply %}
-        </div>
-
-        {% if merchant is defined and merchant is not empty %}
-            <div class="row">
-                <div class="col-sm-2">
-                    <strong>{{ 'Merchant' | trans }}</strong>
-                </div>
-                <div class="col-sm-10">
-                    <a target="_blank" href="/merchant-gui/edit-merchant?id-merchant={{ merchant.idMerchant}}">
-                        {{ merchant.name }}
-                    </a>
-                </div>
+    {% if useTabContentProviders %}
+        {% if tabContents[tab.name] is defined %}
+            {% for tabContent in tabContents[tab.name] %}
+                {% include tabContent %}
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        {% block information %}
+            <div class="well">
+                {% apply trans|raw %}
+                    <h3>{{ 'Add General Information' | trans }}</h3>
+                    <p>{{ 'Below the name and description for your product can be edited for different locales (in different languages).' | trans }}</p>
+                    <p>
+                        <i>{{ 'Note: The SKU prefix, just like the SKUs of your product variants, are not editable after saving anymore.' | trans }}</i>
+                    </p>
+                {% endapply %}
             </div>
-            <div class="hr-line-dashed"></div>
-        {% endif %}
-    {% endblock %}
 
-    {% block product %}
-        {% if currentProduct is defined %}
-            {% include '@ProductApprovalGui/Partials/approval_status_label.twig' ignore missing with {
-                product: currentProduct,
-            } only %}
-        {% endif %}
-    {% endblock %}
-
-    {% block store %}
-        {% if form.store_relation is defined %}
-            {{ form_widget(form.store_relation) }}
-        {% endif %}
-    {% endblock %}
-
-    {% block sku %}
-        {{ form_row(form.sku) }}
-    {% endblock %}
-
-    {% block description %}
-        {% for locale in localeCollection %}
-            {% set formKey = 'general_' ~ locale.localeName %}
-
-            {% if form[formKey] is defined %}
-                {% block descriptionField %}
-                    {% embed '@Gui/Partials/localized-ibox.twig' with {'collapsed': (not loop.first), 'localeName': locale.localeName} %}
-                        {% block content %}
-                            {% for input in form[formKey] %}
-                                <div class="form-group {% if input.vars.errors|length %}has-error{% endif %}">
-                                    {{ form_label(input) }}
-                                    {{ form_widget(input, {'attr': {'class': 'name-translation js-infomational-field'}}) }}
-                                    {{ form_errors(input) }}
-                                </div>
-                            {% endfor %}
-                        {% endblock %}
-                    {% endembed %}
-                {% endblock %}
+            {% if merchant is defined and merchant is not empty %}
+                <div class="row">
+                    <div class="col-sm-2">
+                        <strong>{{ 'Merchant' | trans }}</strong>
+                    </div>
+                    <div class="col-sm-10">
+                        <a target="_blank" href="/merchant-gui/edit-merchant?id-merchant={{ merchant.idMerchant}}">
+                            {{ merchant.name }}
+                        </a>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
             {% endif %}
-        {% endfor %}
-    {% endblock %}
+        {% endblock %}
 
-    {% block newFrom %}
-        {% if form.new_from is defined %}
-            <p>{{ form_row(form.new_from) }}</p>
+        {% block product %}
+            {% if currentProduct is defined %}
+                {% include '@ProductApprovalGui/Partials/approval_status_label.twig' ignore missing with {
+                    product: currentProduct,
+                } only %}
+            {% endif %}
+        {% endblock %}
+
+        {% block store %}
+            {% if form.store_relation is defined %}
+                {{ form_widget(form.store_relation) }}
+            {% endif %}
+        {% endblock %}
+
+        {% block sku %}
+            {{ form_row(form.sku) }}
+        {% endblock %}
+
+        {% block description %}
+            {% for locale in localeCollection %}
+                {% set formKey = 'general_' ~ locale.localeName %}
+
+                {% if form[formKey] is defined %}
+                    {% block descriptionField %}
+                        {% embed '@Gui/Partials/localized-ibox.twig' with {'collapsed': (not loop.first), 'localeName': locale.localeName} %}
+                            {% block content %}
+                                {% for input in form[formKey] %}
+                                    <div class="form-group {% if input.vars.errors|length %}has-error{% endif %}">
+                                        {{ form_label(input) }}
+                                        {{ form_widget(input, {'attr': {'class': 'name-translation js-infomational-field'}}) }}
+                                        {{ form_errors(input) }}
+                                    </div>
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
+                    {% endblock %}
+                {% endif %}
+            {% endfor %}
+        {% endblock %}
+
+        {% block newFrom %}
+            {% if form.new_from is defined %}
+                <p>{{ form_row(form.new_from) }}</p>
+            {% endif %}
+        {% endblock %}
+
+        {% block newTo %}
+            {% if form.new_to is defined %}
+                <p>{{ form_row(form.new_to) }}</p>
+            {% endif %}
+        {% endblock %}
+
+        {% block productAbstractType %}
+            {% if form.product_abstract_types is defined %}
+                {{ form_row(form.product_abstract_types) }}
+            {% endif %}
+        {% endblock %}
+
+        {% if tabContents[tab.name] is defined %}
+            {% for tabContent in tabContents[tab.name] %}
+                {% include tabContent %}
+            {% endfor %}
         {% endif %}
-    {% endblock %}
-
-    {% block newTo %}
-        {% if form.new_to is defined %}
-            <p>{{ form_row(form.new_to) }}</p>
-        {% endif %}
-    {% endblock %}
-
-    {% block productAbstractType %}
-        {% if form.product_abstract_types is defined %}
-            {{ form_row(form.product_abstract_types) }}
-        {% endif %}
-    {% endblock %}
-
-    {% if tabContents[tab.name] is defined %}
-        {% for tabContent in tabContents[tab.name] %}
-            {% include tabContent %}
-        {% endfor %}
     {% endif %}
 {% endblock %}

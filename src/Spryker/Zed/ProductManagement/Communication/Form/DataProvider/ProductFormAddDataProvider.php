@@ -7,6 +7,8 @@
 
 namespace Spryker\Zed\ProductManagement\Communication\Form\DataProvider;
 
+use Generated\Shared\Transfer\ProductAbstractTransfer;
+
 class ProductFormAddDataProvider extends AbstractProductFormDataProvider
 {
     /**
@@ -17,5 +19,32 @@ class ProductFormAddDataProvider extends AbstractProductFormDataProvider
     public function getData(?array $priceDimension = null)
     {
         return $this->getDefaultFormFields($priceDimension);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     *
+     * @return array<string, mixed>
+     */
+    public function getOptions(?ProductAbstractTransfer $productAbstractTransfer = null)
+    {
+        $formOptions = parent::getOptions($productAbstractTransfer);
+
+        return $this->expandFormOptions($formOptions, $productAbstractTransfer);
+    }
+
+    /**
+     * @param array<string, mixed> $formOptions
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     *
+     * @return array<string, mixed>
+     */
+    protected function expandFormOptions(array $formOptions, ?ProductAbstractTransfer $productAbstractTransfer = null): array
+    {
+        foreach ($this->productAbstractFormOptionsExpanderPlugins as $productAbstractFormOptionsExpanderPlugin) {
+            $formOptions = $productAbstractFormOptionsExpanderPlugin->expand($formOptions, $productAbstractTransfer ?? new ProductAbstractTransfer());
+        }
+
+        return $formOptions;
     }
 }
