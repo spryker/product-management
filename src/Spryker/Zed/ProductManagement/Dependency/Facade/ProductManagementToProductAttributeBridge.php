@@ -66,4 +66,14 @@ class ProductManagementToProductAttributeBridge implements ProductManagementToPr
     ): ProductManagementAttributeCollectionTransfer {
         return $this->productAttributeFacade->getProductManagementAttributes($productManagementAttributeFilterTransfer);
     }
+
+    public function getMetaAttributesForProductAbstract(int $idProductAbstract): array
+    {
+        return $this->productAttributeFacade->getMetaAttributesForProductAbstract($idProductAbstract);
+    }
+
+    public function getMetaAttributesForProduct(int $idProduct): array
+    {
+        return $this->productAttributeFacade->getMetaAttributesForProduct($idProduct);
+    }
 }

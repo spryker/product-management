@@ -98,6 +98,10 @@ class ViewController extends AddController
             ->getProductCategoryFacade()
             ->getCategoryTransferCollectionByIdProductAbstract($idProductAbstract, $localeProvider->getCurrentLocale());
 
+        $metaAttributes = $this->getFactory()
+            ->getProductAttributeFacade()
+            ->getMetaAttributesForProductAbstract($idProductAbstract);
+
         $viewData = $this->executeProductAbstractViewActionViewDataExpanderPlugins([
             'currentLocale' => $this->getFactory()->getLocaleFacade()->getCurrentLocale()->getLocaleName(),
             'currentProduct' => $productAbstractTransfer->toArray(),
@@ -109,6 +113,7 @@ class ViewController extends AddController
             'idProduct' => null,
             'idProductAbstract' => $idProductAbstract,
             'productAttributes' => $attributes,
+            'metaAttributes' => $metaAttributes,
             'imageSetCollection' => $imageSets,
             'imageUrlPrefix' => $this->getFactory()->getConfig()->getImageUrlPrefix(),
             'taxSet' => $this->findTaxSet($productAbstractTransfer),
@@ -175,6 +180,10 @@ class ViewController extends AddController
             ->createProductTypeHelper()
             ->isGiftCardByProductAbstractTransfer($productAbstractTransfer);
 
+        $metaAttributes = $this->getFactory()
+            ->getProductAttributeFacade()
+            ->getMetaAttributesForProduct($idProduct);
+
         return $this->viewResponse([
             'currentLocale' => $this->getFactory()->getLocaleFacade()->getCurrentLocale()->getLocaleName(),
             'currentProduct' => $productTransfer->toArray(),
@@ -183,6 +192,7 @@ class ViewController extends AddController
             'idProduct' => $productTransfer->getIdProductConcrete(),
             'idProductAbstract' => $idProductAbstract,
             'productAttributes' => $attributes,
+            'metaAttributes' => $metaAttributes,
             'imageSetCollection' => $imageSets,
             'isProductBundle' => $isProductBundle,
             'isGiftCard' => $isGiftCard,

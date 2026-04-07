@@ -51,6 +51,9 @@
         "spryker/validator": "*",
         "spryker/zed-navigation": "*"
     },
+    "suggest": {
+        "spryker-feature/product-experience-management": "If you want to use visibility type features for product attributes."
+    },
     "autoload": {
         "psr-4": {
             "Spryker\\": "src/Spryker/",

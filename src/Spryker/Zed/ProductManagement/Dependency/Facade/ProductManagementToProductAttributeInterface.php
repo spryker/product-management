@@ -38,4 +38,8 @@ interface ProductManagementToProductAttributeInterface
     public function getProductManagementAttributes(
         ProductManagementAttributeFilterTransfer $productManagementAttributeFilterTransfer
     ): ProductManagementAttributeCollectionTransfer;
+
+    public function getMetaAttributesForProductAbstract(int $idProductAbstract): array;
+
+    public function getMetaAttributesForProduct(int $idProduct): array;
 }
