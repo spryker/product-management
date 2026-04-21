@@ -259,6 +259,20 @@
         "priority": "2"
     },
     {
+        "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Facade/ProductManagementToProductAttributeBridge.php",
+        "description": "Bridges: Method `getMetaAttributesForProductAbstract()` must have `public function get<DomainEntity>Collection(<DomainEntity>CriteriaTransfer): <DomainEntity>CollectionTransfer` signature.",
+        "rule": "BridgeFacadeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Facade/ProductManagementToProductAttributeBridge.php",
+        "description": "Bridges: Method `getMetaAttributesForProduct()` must have `public function get<DomainEntity>Collection(<DomainEntity>CriteriaTransfer): <DomainEntity>CollectionTransfer` signature.",
+        "rule": "BridgeFacadeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
         "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Facade/ProductManagementToProductBridge.php",
         "description": "Bridges: Type should be defined for param `key` in method `Spryker\\Zed\\ProductManagement\\Dependency\\Facade\\ProductManagementToProductBridge::hasProductAttributeKey()`.",
         "rule": "BridgeMethodsRule",
@@ -605,20 +619,6 @@
         "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Service/ProductManagementToUtilEncodingBridge.php",
         "description": "Bridges: Type should be defined for param `options` in method `Spryker\\Zed\\ProductManagement\\Dependency\\Service\\ProductManagementToUtilEncodingBridge::decodeJson()`.",
         "rule": "BridgeMethodsRule",
-        "ruleset": "Spryker",
-        "priority": "2"
-    },
-    {
-        "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Facade/ProductManagementToProductAttributeBridge.php",
-        "description": "Bridges: Method `getMetaAttributesForProductAbstract()` must have `public function get<DomainEntity>Collection(<DomainEntity>CriteriaTransfer): <DomainEntity>CollectionTransfer` signature.",
-        "rule": "BridgeFacadeMethodsRule",
-        "ruleset": "Spryker",
-        "priority": "2"
-    },
-    {
-        "fileName": "src/Spryker/Zed/ProductManagement/Dependency/Facade/ProductManagementToProductAttributeBridge.php",
-        "description": "Bridges: Method `getMetaAttributesForProduct()` must have `public function get<DomainEntity>Collection(<DomainEntity>CriteriaTransfer): <DomainEntity>CollectionTransfer` signature.",
-        "rule": "BridgeFacadeMethodsRule",
         "ruleset": "Spryker",
         "priority": "2"
     }

@@ -66,6 +66,7 @@ class GeneralForm extends AbstractSubForm
                 ],
                 'attr' => [
                     'data-translation-key' => static::FIELD_NAME,
+                    'data-translation-smart-product-management' => 'ProductManagement',
                 ],
                 'sanitize_xss' => true,
             ]);

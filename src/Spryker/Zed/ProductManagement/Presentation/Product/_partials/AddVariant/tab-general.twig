@@ -38,6 +38,14 @@
             {% block content %}
                 {% for input in form[formKey] %}
                     <div class="form-group {% if input.vars.errors|length %}has-error{% endif %}">
+                        {% if input.vars.name == 'name' or input.vars.name == 'description' %}
+                            {% include '@SprykerFeature:AiCommerce/SmartProductManagement/_partials/ai-request-builder-button.twig' ignore missing with {
+                                data: {
+                                    field: input,
+                                    locale: locale,
+                                },
+                            } %}
+                        {% endif %}
                         {{ form_label(input) }}
                         {{ form_widget(input, {'attr': {'class': 'name-translation'}}) }}
                         {{ form_errors(input) }}

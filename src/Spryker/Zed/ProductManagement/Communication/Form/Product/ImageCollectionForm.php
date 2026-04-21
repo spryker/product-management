@@ -63,6 +63,10 @@ class ImageCollectionForm extends AbstractSubForm
      */
     public const FIELD_FK_IMAGE_SET_ID = 'fk_image_set_id';
 
+    public const string FIELD_ALT_TEXT_SMALL = 'alt_text_small';
+
+    public const string FIELD_ALT_TEXT_LARGE = 'alt_text_large';
+
     /**
      * @var string
      */
@@ -119,7 +123,9 @@ class ImageCollectionForm extends AbstractSubForm
             ->addImageSetIdHiddenField($builder, $options)
             ->addImagePreviewField($builder, $options)
             ->addImageSmallField($builder, $options)
+            ->addAltTextSmallField($builder, $options)
             ->addImageBigField($builder, $options)
+            ->addAltTextLargeField($builder, $options)
             ->addSortOrderField($builder, $options);
     }
 
@@ -243,6 +249,49 @@ class ImageCollectionForm extends AbstractSubForm
                 ],
                 'sanitize_xss' => true,
             ]);
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array<string, mixed> $options
+     *
+     * @return $this
+     */
+    protected function addAltTextSmallField(FormBuilderInterface $builder, array $options = [])
+    {
+        $builder->add(static::FIELD_ALT_TEXT_SMALL, TextType::class, [
+            'required' => false,
+            'label' => 'Alt Text Small',
+            'constraints' => [
+                new Length([
+                    'min' => 0,
+                    'max' => 255,
+                ]),
+            ],
+            'sanitize_xss' => true,
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    protected function addAltTextLargeField(FormBuilderInterface $builder, array $options = []): static
+    {
+        $builder->add(static::FIELD_ALT_TEXT_LARGE, TextType::class, [
+            'required' => false,
+            'label' => 'Alt Text Large',
+            'constraints' => [
+                new Length([
+                    'min' => 0,
+                    'max' => 255,
+                ]),
+            ],
+            'sanitize_xss' => true,
+        ]);
 
         return $this;
     }
