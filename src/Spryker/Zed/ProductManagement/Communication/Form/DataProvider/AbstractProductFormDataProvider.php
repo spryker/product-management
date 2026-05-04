@@ -350,7 +350,7 @@ class AbstractProductFormDataProvider
         foreach ($localeCollection as $localeTransfer) {
             $data = [];
             foreach ($imageSetTransferCollection as $imageSetTransfer) {
-                if ($imageSetTransfer->getLocale() === null) {
+                if ($imageSetTransfer->getLocale()?->getIdLocale() === null) {
                     $defaults[$imageSetTransfer->getIdProductImageSet()] = $this->convertProductImageSet($imageSetTransfer);
 
                     continue;
