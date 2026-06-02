@@ -28,7 +28,7 @@
                             {% if productReadiness.values and productReadiness.values|length > 0 %}
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-xs-4"><strong>{{ productReadiness.title | trans }}:</strong></div>
-                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join(', ') }}</div>
+                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join('<br>')|raw }}</div>
                                 </div>
                             {% endif %}
                         {% endfor %}
@@ -57,7 +57,7 @@
                                             {% if productReadiness.values and productReadiness.values|length > 0 %}
                                                 <div class="row" style="margin-bottom: 10px;">
                                                     <div class="col-xs-4"><strong>{{ productReadiness.title | trans }}:</strong></div>
-                                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join(', ') }}</div>
+                                                    <div class="col-xs-8">{{ productReadiness.values|map(v => v|trans)|join('<br>')|raw }}</div>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
