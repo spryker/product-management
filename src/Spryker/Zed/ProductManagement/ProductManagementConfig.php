@@ -13,16 +13,22 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class ProductManagementConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const PRODUCT_TYPE_BUNDLE = 'bundle';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PRODUCT_TYPE_REGULAR = 'regular';
 
     /**
+     * @api
+     *
      * Used for validity datetimes transformation and displaying in messages.
      * Hydration validity format is described in ProductValidity module.
      *
