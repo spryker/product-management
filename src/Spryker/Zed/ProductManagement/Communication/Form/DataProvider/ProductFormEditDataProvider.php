@@ -243,7 +243,7 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
      */
     protected function appendAbstractProductImages(ProductAbstractTransfer $productAbstractTransfer, array $formData)
     {
-        $imageData = $this->getProductImagesForAbstractProduct($productAbstractTransfer->getIdProductAbstract());
+        $imageData = $this->getAbstractProductImageData($productAbstractTransfer);
 
         $result = $formData;
         foreach ($formData as $name => $data) {
@@ -253,6 +253,22 @@ class ProductFormEditDataProvider extends AbstractProductFormDataProvider
         }
 
         return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
+     * @return array<string, mixed>
+     */
+    protected function getAbstractProductImageData(ProductAbstractTransfer $productAbstractTransfer): array
+    {
+        $imageSetTransfers = $productAbstractTransfer->getImageSets()->getArrayCopy();
+
+        if (!$imageSetTransfers) {
+            return $this->getProductImagesForAbstractProduct($productAbstractTransfer->getIdProductAbstract());
+        }
+
+        return $this->getProductImageSetCollection($imageSetTransfers);
     }
 
     /**

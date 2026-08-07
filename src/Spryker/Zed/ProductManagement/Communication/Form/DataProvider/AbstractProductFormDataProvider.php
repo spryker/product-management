@@ -251,14 +251,28 @@ class AbstractProductFormDataProvider
     {
         $localeCollection = $this->localeProvider->getLocaleCollection();
 
+        $attributeKeysPerLocale = [];
+        foreach ($localeCollection as $localeTransfer) {
+            $attributeKeysPerLocale[$localeTransfer->getLocaleNameOrFail()] = $this->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer);
+        }
+
         $localizedAttributeOptions = [];
         foreach ($localeCollection as $localeTransfer) {
-            $localizedAttributeOptions[$localeTransfer->getLocaleName()] = $this->convertAbstractLocalizedAttributesToFormOptions($productAbstractTransfer, $localeTransfer);
+            $localizedAttributeOptions[$localeTransfer->getLocaleName()] = $this->convertAbstractLocalizedAttributesToFormOptions(
+                $productAbstractTransfer,
+                $localeTransfer,
+                $attributeKeysPerLocale[$localeTransfer->getLocaleNameOrFail()],
+            );
         }
         $localizedAttributeOptions[ProductManagementConstants::PRODUCT_MANAGEMENT_DEFAULT_LOCALE] = $this->convertAbstractLocalizedAttributesToFormOptions($productAbstractTransfer, null);
 
+        $variantAttributeKeys = [];
+        foreach ($attributeKeysPerLocale as $localeAttributeKeys) {
+            $variantAttributeKeys = array_unique(array_merge($variantAttributeKeys, $localeAttributeKeys));
+        }
+
         $formOptions = [];
-        $formOptions[ProductFormAdd::OPTION_ATTRIBUTE_SUPER] = $this->convertVariantAttributesToFormOptions($productAbstractTransfer);
+        $formOptions[ProductFormAdd::OPTION_ATTRIBUTE_SUPER] = $this->convertVariantAttributesToFormOptions($productAbstractTransfer, $variantAttributeKeys);
         $formOptions[ProductFormAdd::OPTION_ATTRIBUTE_ABSTRACT] = $localizedAttributeOptions;
 
         $formOptions[ProductFormAdd::OPTION_ID_LOCALE] = $this->currentLocale->getIdLocale();
@@ -566,11 +580,30 @@ class AbstractProductFormDataProvider
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
      * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
+     * @return array<string>
+     */
+    protected function getCombinedAbstractAttributeKeys(
+        ?ProductAbstractTransfer $productAbstractTransfer = null,
+        ?LocaleTransfer $localeTransfer = null
+    ): array {
+        if ($productAbstractTransfer === null) {
+            return [];
+        }
+
+        return $this->productFacade->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
+     * @param array<string>|null $productAttributeKeys Resolved by the caller to avoid repeating the lookup; resolved here when null.
+     *
      * @return array
      */
     protected function convertAbstractLocalizedAttributesToFormOptions(
         ?ProductAbstractTransfer $productAbstractTransfer = null,
-        ?LocaleTransfer $localeTransfer = null
+        ?LocaleTransfer $localeTransfer = null,
+        ?array $productAttributeKeys = null
     ) {
         $values = [];
         foreach ($this->attributeTransferCollection as $type => $attributeTransfer) {
@@ -598,7 +631,6 @@ class AbstractProductFormDataProvider
         }
 
         $productAttributeValues = [];
-        $productAttributeKeys = [];
         if ($productAbstractTransfer) {
             if ($localeTransfer) {
                 foreach ($productAbstractTransfer->getLocalizedAttributes() as $localizedAttributeTransfer) {
@@ -609,9 +641,9 @@ class AbstractProductFormDataProvider
             } else {
                 $productAttributeValues = $productAbstractTransfer->getAttributes();
             }
-
-            $productAttributeKeys = $this->productFacade->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer);
         }
+
+        $productAttributeKeys ??= $this->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer);
 
         foreach ($productAttributeKeys as $type) {
             $isDefined = $this->attributeTransferCollection->has($type);
@@ -691,17 +723,21 @@ class AbstractProductFormDataProvider
 
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer|null $productAbstractTransfer
+     * @param array<string>|null $productAttributeKeys Union across all locales, resolved by the caller; resolved here when null.
      *
      * @return array
      */
-    protected function convertVariantAttributesToFormOptions(?ProductAbstractTransfer $productAbstractTransfer = null)
-    {
-        $productAttributeKeys = [];
-        if ($productAbstractTransfer) {
+    protected function convertVariantAttributesToFormOptions(
+        ?ProductAbstractTransfer $productAbstractTransfer = null,
+        ?array $productAttributeKeys = null
+    ) {
+        if ($productAttributeKeys === null) {
+            $productAttributeKeys = [];
+
             foreach ($this->localeProvider->getLocaleCollection() as $localeTransfer) {
                 $productAttributeKeys = array_unique(array_merge(
                     $productAttributeKeys,
-                    $this->productFacade->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer),
+                    $this->getCombinedAbstractAttributeKeys($productAbstractTransfer, $localeTransfer),
                 ));
             }
         }

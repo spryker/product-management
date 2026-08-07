@@ -320,6 +320,9 @@ class ProductConcreteFormEdit extends ProductFormAdd
                 'label' => false,
                 'entry_options' => [
                     'locale' => $options[static::OPTION_LOCALE],
+                    StockForm::OPTION_WAREHOUSE_TO_STORE_MAPPING => $this->getFactory()
+                        ->getStockFacade()
+                        ->getWarehouseToStoreMapping(),
                 ],
             ]);
 

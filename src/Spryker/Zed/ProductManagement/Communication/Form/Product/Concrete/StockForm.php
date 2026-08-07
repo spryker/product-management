@@ -58,6 +58,11 @@ class StockForm extends AbstractType
     protected const OPTION_LOCALE = 'locale';
 
     /**
+     * @var string
+     */
+    public const OPTION_WAREHOUSE_TO_STORE_MAPPING = 'warehouse_to_store_mapping';
+
+    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<string, mixed> $options
      *
@@ -79,6 +84,7 @@ class StockForm extends AbstractType
 
         $resolver->setDefaults([
             static::OPTION_LOCALE => null,
+            static::OPTION_WAREHOUSE_TO_STORE_MAPPING => null,
         ]);
     }
 
@@ -176,9 +182,11 @@ class StockForm extends AbstractType
         $stockProduct = $form->getViewData();
         $stockType = $stockProduct[static::FIELD_TYPE];
 
-        $mapping = $this->getFactory()->getStockFacade()->getWarehouseToStoreMapping();
-        if (isset($mapping[$stockType])) {
-            $view->vars['available_in_stores'] = $mapping[$stockType];
+        $warehouseToStoreMapping = $options[static::OPTION_WAREHOUSE_TO_STORE_MAPPING]
+            ?? $this->getFactory()->getStockFacade()->getWarehouseToStoreMapping();
+
+        if (isset($warehouseToStoreMapping[$stockType])) {
+            $view->vars['available_in_stores'] = $warehouseToStoreMapping[$stockType];
         }
     }
 }
