@@ -60,10 +60,6 @@ class ViewController extends AddController
             return new RedirectResponse('/product-management');
         }
 
-        $concreteProductCollection = $this->getFactory()
-            ->getProductFacade()
-            ->getConcreteProductsByAbstractProductId($idProductAbstract);
-
         $localeProvider = $this->getFactory()->createLocaleProvider();
 
         $variantTable = $this
@@ -105,7 +101,7 @@ class ViewController extends AddController
         $viewData = $this->executeProductAbstractViewActionViewDataExpanderPlugins([
             'currentLocale' => $this->getFactory()->getLocaleFacade()->getCurrentLocale()->getLocaleName(),
             'currentProduct' => $productAbstractTransfer->toArray(),
-            'concreteProductCollection' => $concreteProductCollection,
+            'concreteProductCollection' => [],
             'localeCollection' => $localeProvider->getLocaleCollection(),
             'attributeLocaleCollection' => $localeProvider->getLocaleCollection(true),
             'variantTable' => $variantTable->render(),

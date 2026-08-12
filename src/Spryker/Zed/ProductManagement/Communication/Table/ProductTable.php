@@ -82,6 +82,8 @@ class ProductTable extends AbstractProductTable
      */
     public const COL_CONCRETE_SKU = 'concrete_sku';
 
+    protected const string COL_ACTIVE_CONCRETE_COUNT = 'active_concrete_count';
+
     /**
      * @var \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface
      */
@@ -295,10 +297,13 @@ class ProductTable extends AbstractProductTable
             ->productQueryQueryContainer
             ->queryProductAbstract()
             ->leftJoinSpyTaxSet()
+            ->leftJoinSpyProductAbstractStore()
             ->leftJoinSpyProductAbstractLocalizedAttributes()
             ->addJoinCondition('SpyProductAbstractLocalizedAttributes', 'SpyProductAbstractLocalizedAttributes.fk_locale = ?', $this->localeTransfer->getIdLocale())
             ->withColumn(SpyProductAbstractLocalizedAttributesTableMap::COL_NAME, static::COL_NAME)
-            ->withColumn(SpyTaxSetTableMap::COL_NAME, static::COL_TAX_SET);
+            ->withColumn(SpyTaxSetTableMap::COL_NAME, static::COL_TAX_SET)
+            ->withColumn($this->getVariantCountSubquery(), static::COL_VARIANT_COUNT)
+            ->withColumn($this->getActiveConcreteCountSubquery(), static::COL_ACTIVE_CONCRETE_COUNT);
 
         $query = $this->expandQueryWithFilterConditions($query);
         $query = $this->expandPropelQuery($query);
@@ -450,7 +455,7 @@ class ProductTable extends AbstractProductTable
             static::COL_SKU => $productAbstractEntity->getSku(),
             static::COL_NAME => $this->resolveProductName($productAbstractEntity, $productAbstractLocalizedAttributeNames),
             static::COL_TAX_SET => $productAbstractEntity->getVirtualColumn(static::COL_TAX_SET),
-            static::COL_VARIANT_COUNT => $this->formatInt($productAbstractEntity->getSpyProducts()->count()),
+            static::COL_VARIANT_COUNT => $this->formatInt((int)$productAbstractEntity->getVirtualColumn(static::COL_VARIANT_COUNT)),
             static::COL_STATUS => $this->getAbstractProductStatusLabel($productAbstractEntity),
             static::COL_PRODUCT_TYPES => $this->getTypeName($productAbstractEntity),
             static::COL_STORE_RELATION => $this->getStoreNames($productAbstractEntity->getIdProductAbstract()),
@@ -458,6 +463,28 @@ class ProductTable extends AbstractProductTable
         ];
 
         return $this->executeItemDataExpanderPlugins($item);
+    }
+
+    protected function getActiveConcreteCountSubquery(): string
+    {
+        return sprintf(
+            '(SELECT COUNT(*) FROM %s WHERE %s = %s AND %s = %s)',
+            SpyProductTableMap::TABLE_NAME,
+            SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT,
+            SpyProductAbstractTableMap::COL_ID_PRODUCT_ABSTRACT,
+            SpyProductTableMap::COL_IS_ACTIVE,
+            'true',
+        );
+    }
+
+    protected function getVariantCountSubquery(): string
+    {
+        return sprintf(
+            '(SELECT COUNT(*) FROM %s WHERE %s = %s)',
+            SpyProductTableMap::TABLE_NAME,
+            SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT,
+            SpyProductAbstractTableMap::COL_ID_PRODUCT_ABSTRACT,
+        );
     }
 
     /**
@@ -607,32 +634,9 @@ class ProductTable extends AbstractProductTable
      */
     protected function getAbstractProductStatusLabel(SpyProductAbstract $productAbstractEntity)
     {
-        $isActive = false;
-        foreach ($productAbstractEntity->getSpyProducts() as $spyProductEntity) {
-            if ($spyProductEntity->getIsActive()) {
-                $isActive = true;
-            }
-        }
+        $isActive = (int)$productAbstractEntity->getVirtualColumn(static::COL_ACTIVE_CONCRETE_COUNT) > 0;
 
         return $this->getStatusLabel($isActive);
-    }
-
-    /**
-     * @deprecated Use {@link \Spryker\Zed\ProductManagement\Communication\Helper\ProductTypeHelperInterface::isProductBundleByProductAbstractEntity()} instead.
-     *
-     * @param \Orm\Zed\Product\Persistence\SpyProductAbstract $productAbstractEntity
-     *
-     * @return string
-     */
-    protected function getIsBundleProductLable(SpyProductAbstract $productAbstractEntity)
-    {
-        foreach ($productAbstractEntity->getSpyProducts() as $spyProductEntity) {
-            if ($spyProductEntity->getSpyProductBundlesRelatedByFkProduct()->count() > 0) {
-                return $this->generateLabel('Yes', null);
-            }
-        }
-
-        return $this->generateLabel('No', null);
     }
 
     protected function expandPropelQuery(SpyProductAbstractQuery $query): ModelCriteria

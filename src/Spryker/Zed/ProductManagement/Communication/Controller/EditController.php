@@ -74,10 +74,6 @@ class EditController extends AddController
             )
             ->handleRequest($request);
 
-        $concreteProductCollection = $this->getFactory()
-            ->getProductFacade()
-            ->getConcreteProductsByAbstractProductId($idProductAbstract);
-
         $localeProvider = $this->getFactory()->createLocaleProvider();
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,7 +113,7 @@ class EditController extends AddController
             'currentLocale' => $this->getFactory()->getLocaleFacade()->getCurrentLocale()->getLocaleName(),
             'currentProduct' => $productAbstractTransfer->toArray(),
             'superAttributesCount' => $this->getFactory()->createProductAttributeHelper()->getProductAbstractSuperAttributesCount($productAbstractTransfer),
-            'concreteProductCollection' => $concreteProductCollection,
+            'concreteProductCollection' => [],
             'localeCollection' => $localeProvider->getLocaleCollection(),
             'attributeLocaleCollection' => $localeProvider->getLocaleCollection(true),
             'variantTable' => $variantTable->render(),

@@ -45,13 +45,12 @@ class ProductTypeHelper implements ProductTypeHelperInterface
      */
     public function isProductBundleByProductAbstractEntity(SpyProductAbstract $productAbstractEntity)
     {
-        foreach ($productAbstractEntity->getSpyProducts() as $productEntity) {
-            if ($productEntity->getSpyProductBundlesRelatedByFkProduct()->count() > 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->productQueryQueryContainer
+            ->queryProduct()
+            ->filterByFkProductAbstract($productAbstractEntity->getIdProductAbstract())
+                ->useSpyProductBundleRelatedByFkProductQuery()
+            ->endUse()
+            ->exists();
     }
 
     /**

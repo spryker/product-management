@@ -100,7 +100,13 @@ class ProductConcreteFormEditDataProvider extends AbstractProductFormDataProvide
      */
     public function getOptions(?ProductAbstractTransfer $productAbstractTransfer = null, $type = null)
     {
-        $formOptions = parent::getOptions($productAbstractTransfer);
+        $formOptions = [];
+        $formOptions[ProductFormAdd::OPTION_ATTRIBUTE_SUPER] = [];
+        $formOptions[ProductFormAdd::OPTION_ATTRIBUTE_ABSTRACT] = [];
+
+        $formOptions[ProductFormAdd::OPTION_ID_LOCALE] = $this->currentLocale->getIdLocale();
+        $formOptions[ProductFormAdd::OPTION_LOCALE] = $this->currentLocale->getLocaleNameOrFail();
+        $formOptions[ProductFormAdd::OPTION_TAX_RATES] = $this->taxCollection;
 
         $formOptions[ProductConcreteFormEdit::OPTION_IS_BUNDLE_ITEM] = ($type === ProductManagementConfig::PRODUCT_TYPE_BUNDLE) ? true : false;
 
