@@ -22,6 +22,8 @@ use Spryker\Zed\ProductManagement\Communication\Helper\ProductTypeHelper;
 use Spryker\Zed\ProductManagement\Dependency\Facade\ProductManagementToProductBridge;
 use Spryker\Zed\ProductManagement\Persistence\ProductManagementRepository;
 use Spryker\Zed\ProductManagement\Persistence\ProductManagementRepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\LoaderInterface;
@@ -55,6 +57,13 @@ class ProductTableTest extends Unit
      * @var string
      */
     protected const SERVICE_TWIG = 'twig';
+
+    /**
+     * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     *
+     * @var string
+     */
+    protected const SERVICE_REQUEST_STACK = 'request_stack';
 
     /**
      * @uses \Spryker\Zed\UtilNumber\Communication\Plugin\Application\NumberFormatterApplicationPlugin::SERVICE_UTIL_NUMBER
@@ -122,6 +131,14 @@ class ProductTableTest extends Unit
         $this->registerTwigServiceMock();
         $this->registerUtilNumberService();
         $this->registerLocaleService();
+        $this->registerRequestStack();
+    }
+
+    protected function registerRequestStack(): void
+    {
+        $requestStack = new RequestStack();
+        $requestStack->push(Request::create('/'));
+        $this->tester->getContainer()->set(static::SERVICE_REQUEST_STACK, $requestStack);
     }
 
     public function testFetchDataShouldReturnProductsWithDefaultLocale(): void
@@ -279,6 +296,42 @@ class ProductTableTest extends Unit
         // Assert
         $this->assertEquals(static::ID_PRODUCT_ABSTRACT, $productTableData[0][ProductTableMock::COL_ID_PRODUCT_ABSTRACT]);
         $this->assertEquals($abstractSku, $productTableData[0][ProductTableMock::COL_SKU]);
+    }
+
+    /**
+     * @group CC-40027
+     *
+     * @return void
+     */
+    public function testFetchDataReturnsAbstractProductOnceWhenAssignedToMultipleStores(): void
+    {
+        // Arrange
+        $storeDeTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_DE]);
+        $storeAtTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_AT]);
+        $storeRelationTransfer = (new StoreRelationTransfer())
+            ->addStores($storeDeTransfer)
+            ->addIdStores($storeDeTransfer->getIdStore())
+            ->addStores($storeAtTransfer)
+            ->addIdStores($storeAtTransfer->getIdStore());
+        $this->tester->haveProduct(
+            [ProductConcreteTransfer::SKU => 'concrete-test-sku'],
+            [
+                ProductAbstractTransfer::ID_PRODUCT_ABSTRACT => static::ID_PRODUCT_ABSTRACT,
+                ProductAbstractTransfer::SKU => 'abstract-test-sku',
+                ProductAbstractTransfer::STORE_RELATION => $storeRelationTransfer,
+            ],
+        );
+        $productTableMock = $this->createProductTableMock($this->localeTransfers[static::LOCALE_NAME_DE]);
+
+        // Act
+        $productTableData = $productTableMock->fetchData();
+
+        // Assert
+        $matchingRows = array_filter($productTableData, static function (array $row): bool {
+            return $row[ProductTableMock::COL_ID_PRODUCT_ABSTRACT] === (string)static::ID_PRODUCT_ABSTRACT;
+        });
+        $this->assertCount(1, $matchingRows, 'Abstract product assigned to two stores must appear exactly once.');
+        $this->assertCount(1, $productTableData);
     }
 
     protected function registerTwigServiceMock(): void

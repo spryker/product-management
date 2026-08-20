@@ -296,6 +296,7 @@ class ProductTable extends AbstractProductTable
         $query = $this
             ->productQueryQueryContainer
             ->queryProductAbstract()
+            ->distinct()
             ->leftJoinSpyTaxSet()
             ->leftJoinSpyProductAbstractStore()
             ->leftJoinSpyProductAbstractLocalizedAttributes()
