@@ -56,10 +56,8 @@ class AbstractProductFormDataProviderTest extends Unit
 
         $reflectionClass = new ReflectionClass(get_class($productFormDataProviderMock));
         $reflectionProperty = $reflectionClass->getProperty('imageUrlPrefix');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($productFormDataProviderMock, static::IMAGE_URL_PREFIX);
         $reflectionMethod = $reflectionClass->getMethod('getImageUrl');
-        $reflectionMethod->setAccessible(true);
 
         $testData = $this->prepareTestData();
 

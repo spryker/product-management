@@ -55,7 +55,6 @@ class ViewControllerTest extends Unit
 
         $reflectionClass = new ReflectionClass(get_class($vieControllerMock));
         $reflectionMethod = $reflectionClass->getMethod('getImageUrl');
-        $reflectionMethod->setAccessible(true);
 
         $testData = $this->prepareTestData();
 
