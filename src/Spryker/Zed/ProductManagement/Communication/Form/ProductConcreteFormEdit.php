@@ -8,6 +8,7 @@
 namespace Spryker\Zed\ProductManagement\Communication\Form;
 
 use DateTime;
+use Spryker\Zed\Gui\Communication\Form\Type\DateTimePickerType;
 use Spryker\Zed\ProductManagement\Communication\Form\Product\Concrete\ConcreteGeneralForm;
 use Spryker\Zed\ProductManagement\Communication\Form\Product\Concrete\StockForm;
 use Symfony\Component\Form\CallbackTransformer;
@@ -74,6 +75,21 @@ class ProductConcreteFormEdit extends ProductFormAdd
      * @var string
      */
     public const VALIDITY_DATETIME_FORMAT = 'yyyy-MM-dd HH:mm';
+
+    /**
+     * @var string
+     */
+    protected const RANGE_GROUP_VALIDITY = 'product-concrete-validity';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_VALID_FROM_FIELD_CLASS = 'datepicker js-from-datetime safe-datetime';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_VALID_TO_FIELD_CLASS = 'datepicker js-to-datetime safe-datetime';
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -162,16 +178,11 @@ class ProductConcreteFormEdit extends ProductFormAdd
     {
         $builder->add(
             static::FIELD_VALID_FROM,
-            DateTimeType::class,
+            $this->getDateTimeFieldType(),
             [
                 'format' => static::VALIDITY_DATETIME_FORMAT,
-                'html5' => false,
                 'label' => 'Valid From (Time in UTC)',
-                'widget' => 'single_text',
                 'required' => false,
-                'attr' => [
-                    'class' => 'datepicker js-from-datetime safe-datetime',
-                ],
                 'constraints' => [
                     new Callback([
                         'callback' => function ($newFrom, ExecutionContextInterface $context) {
@@ -198,7 +209,7 @@ class ProductConcreteFormEdit extends ProductFormAdd
                         },
                     ]),
                 ],
-            ],
+            ] + $this->getDateTimeFieldOptions(static::RANGE_ROLE_START, static::LEGACY_VALID_FROM_FIELD_CLASS),
         );
 
         $this->addDateTimeTransformer(static::FIELD_VALID_FROM, $builder);
@@ -215,16 +226,11 @@ class ProductConcreteFormEdit extends ProductFormAdd
     {
         $builder->add(
             static::FIELD_VALID_TO,
-            DateTimeType::class,
+            $this->getDateTimeFieldType(),
             [
                 'format' => static::VALIDITY_DATETIME_FORMAT,
-                'html5' => false,
                 'label' => 'Valid To (Time in UTC)',
-                'widget' => 'single_text',
                 'required' => false,
-                'attr' => [
-                    'class' => 'datepicker js-to-datetime safe-datetime',
-                ],
                 'constraints' => [
                     new Callback([
                         'callback' => function ($newTo, ExecutionContextInterface $context) {
@@ -247,7 +253,7 @@ class ProductConcreteFormEdit extends ProductFormAdd
                         },
                     ]),
                 ],
-            ],
+            ] + $this->getDateTimeFieldOptions(static::RANGE_ROLE_END, static::LEGACY_VALID_TO_FIELD_CLASS),
         );
 
         $this->addDateTimeTransformer(static::FIELD_VALID_TO, $builder);
@@ -376,6 +382,44 @@ class ProductConcreteFormEdit extends ProductFormAdd
     protected function createGeneralForm()
     {
         return ConcreteGeneralForm::class;
+    }
+
+    protected function getDateTimeFieldType(): string
+    {
+        if ($this->isGuiDateTimePickerTypeAvailable()) {
+            return DateTimePickerType::class;
+        }
+
+        return DateTimeType::class;
+    }
+
+    /**
+     * @param string $rangeRole
+     * @param string $legacyFieldClass
+     *
+     * @return array<string, mixed>
+     */
+    protected function getDateTimeFieldOptions(string $rangeRole, string $legacyFieldClass): array
+    {
+        if ($this->isGuiDateTimePickerTypeAvailable()) {
+            return [
+                'range_group' => static::RANGE_GROUP_VALIDITY,
+                'range_role' => $rangeRole,
+            ];
+        }
+
+        return [
+            'html5' => false,
+            'widget' => 'single_text',
+            'attr' => [
+                'class' => $legacyFieldClass,
+            ],
+        ];
+    }
+
+    protected function isGuiDateTimePickerTypeAvailable(): bool
+    {
+        return class_exists(DateTimePickerType::class);
     }
 
     /**

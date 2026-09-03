@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\LocaleTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
+use Spryker\Zed\Gui\Communication\Form\Type\DatePickerType;
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Spryker\Zed\ProductManagement\Communication\Form\Product\AttributeAbstractForm;
@@ -76,6 +77,31 @@ class ProductFormAdd extends AbstractType
      * @var string
      */
     public const FIELD_NEW_TO = 'new_to';
+
+    /**
+     * @var string
+     */
+    protected const RANGE_GROUP_NEW = 'product-new-validity';
+
+    /**
+     * @var string
+     */
+    protected const RANGE_ROLE_START = 'start';
+
+    /**
+     * @var string
+     */
+    protected const RANGE_ROLE_END = 'end';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_NEW_FROM_FIELD_CLASS = 'datepicker js-from-date safe-datetime';
+
+    /**
+     * @var string
+     */
+    protected const LEGACY_NEW_TO_FIELD_CLASS = 'datepicker js-to-date safe-datetime';
 
     /**
      * @var string
@@ -442,6 +468,43 @@ class ProductFormAdd extends AbstractType
         return $this;
     }
 
+    protected function getDateFieldType(): string
+    {
+        if ($this->isGuiDatePickerTypeAvailable()) {
+            return DatePickerType::class;
+        }
+
+        return DateType::class;
+    }
+
+    /**
+     * @param string $rangeRole
+     * @param string $legacyFieldClass
+     *
+     * @return array<string, mixed>
+     */
+    protected function getDateFieldOptions(string $rangeRole, string $legacyFieldClass): array
+    {
+        if ($this->isGuiDatePickerTypeAvailable()) {
+            return [
+                'range_group' => static::RANGE_GROUP_NEW,
+                'range_role' => $rangeRole,
+            ];
+        }
+
+        return [
+            'widget' => 'single_text',
+            'attr' => [
+                'class' => $legacyFieldClass,
+            ],
+        ];
+    }
+
+    protected function isGuiDatePickerTypeAvailable(): bool
+    {
+        return class_exists(DatePickerType::class);
+    }
+
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
@@ -449,16 +512,12 @@ class ProductFormAdd extends AbstractType
      */
     protected function addNewFromDateField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_NEW_FROM, DateType::class, [
-            'widget' => 'single_text',
+        $builder->add(static::FIELD_NEW_FROM, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'datepicker js-from-date safe-datetime',
-            ],
             'constraints' => [
                 $this->createNewFromRangeConstraint(),
             ],
-        ]);
+        ] + $this->getDateFieldOptions(static::RANGE_ROLE_START, static::LEGACY_NEW_FROM_FIELD_CLASS));
 
         $builder->get(static::FIELD_NEW_FROM)
             ->addModelTransformer($this->createDateTimeModelTransformer());
@@ -473,16 +532,12 @@ class ProductFormAdd extends AbstractType
      */
     protected function addNewToDateField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_NEW_TO, DateType::class, [
-            'widget' => 'single_text',
+        $builder->add(static::FIELD_NEW_TO, $this->getDateFieldType(), [
             'required' => false,
-            'attr' => [
-                'class' => 'datepicker js-to-date safe-datetime',
-            ],
             'constraints' => [
                 $this->createNewToFieldRangeConstraint(),
             ],
-        ]);
+        ] + $this->getDateFieldOptions(static::RANGE_ROLE_END, static::LEGACY_NEW_TO_FIELD_CLASS));
 
         $builder->get(static::FIELD_NEW_TO)
             ->addModelTransformer($this->createDateTimeModelTransformer());

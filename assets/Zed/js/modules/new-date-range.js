@@ -5,9 +5,18 @@
 
 'use strict';
 
+/**
+ * @deprecated Superseded by `DatePickerType` and the Gui DateTimePicker, which initialize and
+ *   range-link the fields declaratively. Kept only for installations running spryker/gui older
+ *   than 5.4.0.
+ */
 $(document).ready(function () {
     var $fromDate = $('.js-from-date');
     var $toDate = $('.js-to-date');
+
+    if ($fromDate.is('[data-spryker-picker]')) {
+        return;
+    }
 
     $fromDate.datepicker({
         dateFormat: 'yy-mm-dd',

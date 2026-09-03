@@ -5,6 +5,11 @@
 
 'use strict';
 
+/**
+ * @deprecated Superseded by `DateTimePickerType` and the Gui DateTimePicker, which initialize and
+ *   range-link the fields declaratively. Kept only for installations running spryker/gui older
+ *   than 5.4.0.
+ */
 $(document).ready(function () {
     function getGtmDateTimeString(datetext) {
         var d = new Date();
@@ -24,6 +29,13 @@ $(document).ready(function () {
 
     var $fromDateTime = $('.js-from-datetime');
     var $toDateTime = $('.js-to-datetime');
+
+    // From spryker/gui 5.4.0 on, these fields are built with `DateTimePickerType`, which marks them
+    // with `data-spryker-picker` and lets the Gui DateTimePicker initialize and range-link them.
+    // Older Gui versions have no such type, so the legacy picker below is set up instead.
+    if ($fromDateTime.is('[data-spryker-picker]')) {
+        return;
+    }
 
     $fromDateTime.datepicker({
         dateFormat: 'yy-mm-dd',
