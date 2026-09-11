@@ -256,7 +256,7 @@ class ProductTable extends AbstractProductTable
             $this->isConcreteSkuSearchEnabled()
             && $value === SpyProductTableMap::COL_SKU
         ) {
-            return $this->buildConditionWithStrictSearch($value, $filter, $conditionParameter);
+            return $this->buildConcreteSkuExistsCondition($filter, $conditionParameter);
         }
 
         return parent::buildCondition($searchPattern, $value, $filter, $conditionParameter);
@@ -274,6 +274,17 @@ class ProductTable extends AbstractProductTable
             $value,
             $filter,
             str_replace('%', '', $conditionParameter),
+        );
+    }
+
+    protected function buildConcreteSkuExistsCondition(string $filter, string $conditionParameter): string
+    {
+        return sprintf(
+            'EXISTS (SELECT 1 FROM %s WHERE %s = %s AND %s)',
+            SpyProductTableMap::TABLE_NAME,
+            SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT,
+            SpyProductAbstractTableMap::COL_ID_PRODUCT_ABSTRACT,
+            $this->buildConditionWithStrictSearch(SpyProductTableMap::COL_SKU, $filter, $conditionParameter),
         );
     }
 
@@ -296,9 +307,7 @@ class ProductTable extends AbstractProductTable
         $query = $this
             ->productQueryQueryContainer
             ->queryProductAbstract()
-            ->distinct()
             ->leftJoinSpyTaxSet()
-            ->leftJoinSpyProductAbstractStore()
             ->leftJoinSpyProductAbstractLocalizedAttributes()
             ->addJoinCondition('SpyProductAbstractLocalizedAttributes', 'SpyProductAbstractLocalizedAttributes.fk_locale = ?', $this->localeTransfer->getIdLocale())
             ->withColumn(SpyProductAbstractLocalizedAttributesTableMap::COL_NAME, static::COL_NAME)
@@ -342,10 +351,11 @@ class ProductTable extends AbstractProductTable
         }
 
         $booleanStatus = $status === ProductStatusEnum::ACTIVE->value;
-        $productAbstractQuery
-            ->useSpyProductQuery()
-                ->filterByIsActive($booleanStatus)
-                ->groupByFkProductAbstract()
+
+        /** @var \Orm\Zed\Product\Persistence\SpyProductQuery $productExistsQuery */
+        $productExistsQuery = $productAbstractQuery->useExistsQuery('SpyProduct');
+        $productExistsQuery
+            ->filterByIsActive($booleanStatus)
             ->endUse();
 
         return $productAbstractQuery;
@@ -359,10 +369,10 @@ class ProductTable extends AbstractProductTable
             return $productAbstractQuery;
         }
 
-        $productAbstractQuery
-            ->useSpyProductAbstractStoreQuery()
-                ->filterByFkStore_In($stores)
-                ->groupByFkProductAbstract()
+        /** @var \Orm\Zed\Product\Persistence\SpyProductAbstractStoreQuery $productAbstractStoreExistsQuery */
+        $productAbstractStoreExistsQuery = $productAbstractQuery->useExistsQuery('SpyProductAbstractStore');
+        $productAbstractStoreExistsQuery
+            ->filterByFkStore_In($stores)
             ->endUse();
 
         return $productAbstractQuery;
@@ -642,19 +652,7 @@ class ProductTable extends AbstractProductTable
 
     protected function expandPropelQuery(SpyProductAbstractQuery $query): ModelCriteria
     {
-        if ($this->isConcreteSkuSearchEnabled()) {
-            $query = $this->addConcreteProductSkuSearch($query);
-        }
-
         return $this->productManagementRepository->expandQuery($query);
-    }
-
-    protected function addConcreteProductSkuSearch(SpyProductAbstractQuery $query): SpyProductAbstractQuery
-    {
-        $query->distinct()
-              ->leftJoinSpyProduct();
-
-        return $query;
     }
 
     /**
