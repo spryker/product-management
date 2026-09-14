@@ -184,8 +184,8 @@ class ProductConcreteFormEdit extends ProductFormAdd
                 'label' => 'Valid From (Time in UTC)',
                 'required' => false,
                 'constraints' => [
-                    new Callback([
-                        'callback' => function ($newFrom, ExecutionContextInterface $context) {
+                    new Callback(
+                        callback: function ($newFrom, ExecutionContextInterface $context) {
                             $formData = $context->getRoot()->getData();
 
                             if (!$newFrom) {
@@ -207,7 +207,7 @@ class ProductConcreteFormEdit extends ProductFormAdd
                                 $context->addViolation('Date "Valid from" can not be the same as "Valid to".');
                             }
                         },
-                    ]),
+                    ),
                 ],
             ] + $this->getDateTimeFieldOptions(static::RANGE_ROLE_START, static::LEGACY_VALID_FROM_FIELD_CLASS),
         );
@@ -232,8 +232,8 @@ class ProductConcreteFormEdit extends ProductFormAdd
                 'label' => 'Valid To (Time in UTC)',
                 'required' => false,
                 'constraints' => [
-                    new Callback([
-                        'callback' => function ($newTo, ExecutionContextInterface $context) {
+                    new Callback(
+                        callback: function ($newTo, ExecutionContextInterface $context) {
                             $formData = $context->getRoot()->getData();
 
                             if (!$newTo) {
@@ -251,7 +251,7 @@ class ProductConcreteFormEdit extends ProductFormAdd
                                 $context->addViolation('Date "Valid to" can not be earlier than "Valid from".');
                             }
                         },
-                    ]),
+                    ),
                 ],
             ] + $this->getDateTimeFieldOptions(static::RANGE_ROLE_END, static::LEGACY_VALID_TO_FIELD_CLASS),
         );
@@ -384,6 +384,9 @@ class ProductConcreteFormEdit extends ProductFormAdd
         return ConcreteGeneralForm::class;
     }
 
+    /**
+     * @phpstan-return class-string<\Symfony\Component\Form\FormTypeInterface>
+     */
     protected function getDateTimeFieldType(): string
     {
         if ($this->isGuiDateTimePickerTypeAvailable()) {

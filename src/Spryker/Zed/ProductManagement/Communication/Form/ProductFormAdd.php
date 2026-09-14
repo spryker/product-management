@@ -439,8 +439,8 @@ class ProductFormAdd extends AbstractType
                     new SkuRegex([
                         'groups' => [static::VALIDATION_GROUP_UNIQUE_SKU],
                     ]),
-                    new Callback([
-                        'callback' => function ($sku, ExecutionContextInterface $context) {
+                    new Callback(
+                        callback: function ($sku, ExecutionContextInterface $context) {
                             $form = $context->getRoot();
                             $idProductAbstract = $form->get(self::FIELD_ID_PRODUCT_ABSTRACT)->getData();
 
@@ -460,14 +460,17 @@ class ProductFormAdd extends AbstractType
                                 );
                             }
                         },
-                        'groups' => [static::VALIDATION_GROUP_UNIQUE_SKU],
-                    ]),
+                        groups: [static::VALIDATION_GROUP_UNIQUE_SKU],
+                    ),
                 ],
             ]);
 
         return $this;
     }
 
+    /**
+     * @phpstan-return class-string<\Symfony\Component\Form\FormTypeInterface>
+     */
     protected function getDateFieldType(): string
     {
         if ($this->isGuiDatePickerTypeAvailable()) {
@@ -570,16 +573,16 @@ class ProductFormAdd extends AbstractType
         $builder
             ->add($name, $this->createGeneralForm(), [
                 'label' => false,
-                'constraints' => [new Callback([
-                    'callback' => function ($dataToValidate, ExecutionContextInterface $context) {
+                'constraints' => [new Callback(
+                    callback: function ($dataToValidate, ExecutionContextInterface $context) {
                         $selectedAttributes = array_filter(array_values($dataToValidate));
                         if (!$selectedAttributes && !array_key_exists($context->getGroup(), GeneralForm::$errorFieldsDisplayed)) {
                             $context->addViolation('Please enter at least an SKU and a Name of the product in every locale in the General section');
                             GeneralForm::$errorFieldsDisplayed[$context->getGroup()] = true;
                         }
                     },
-                    'groups' => [static::VALIDATION_GROUP_GENERAL],
-                ])],
+                    groups: [static::VALIDATION_GROUP_GENERAL],
+                )],
             ]);
 
         return $this;
@@ -603,8 +606,8 @@ class ProductFormAdd extends AbstractType
                     AttributeAbstractForm::OPTION_LOCALE_TRANSFER => $localeTransfer,
                 ],
                 'label' => false,
-                'constraints' => [new Callback([
-                    'callback' => function ($attributes, ExecutionContextInterface $context) {
+                'constraints' => [new Callback(
+                    callback: function ($attributes, ExecutionContextInterface $context) {
                         foreach ($attributes as $type => $valueSet) {
                             if ($valueSet[AttributeAbstractForm::FIELD_NAME] && empty($valueSet[AttributeAbstractForm::FIELD_VALUE])) {
                                 $context->addViolation(sprintf(
@@ -614,8 +617,8 @@ class ProductFormAdd extends AbstractType
                             }
                         }
                     },
-                    'groups' => [static::VALIDATION_GROUP_ATTRIBUTE_ABSTRACT],
-                ])],
+                    groups: [static::VALIDATION_GROUP_ATTRIBUTE_ABSTRACT],
+                )],
             ]);
 
         return $this;
@@ -636,8 +639,8 @@ class ProductFormAdd extends AbstractType
                     AttributeSuperForm::OPTION_ATTRIBUTE => $options,
                 ],
                 'label' => false,
-                'constraints' => [new Callback([
-                    'callback' => function ($attributes, ExecutionContextInterface $context) {
+                'constraints' => [new Callback(
+                    callback: function ($attributes, ExecutionContextInterface $context) {
                         foreach ($attributes as $type => $valueSet) {
                             if ($valueSet[AttributeSuperForm::FIELD_NAME] && empty($valueSet[AttributeSuperForm::FIELD_VALUE])) {
                                 $context->addViolation(sprintf(
@@ -647,8 +650,8 @@ class ProductFormAdd extends AbstractType
                             }
                         }
                     },
-                    'groups' => [static::VALIDATION_GROUP_ATTRIBUTE_SUPER],
-                ])],
+                    groups: [static::VALIDATION_GROUP_ATTRIBUTE_SUPER],
+                )],
             ]);
 
         return $this;
@@ -815,7 +818,7 @@ class ProductFormAdd extends AbstractType
     }
 
     /**
-     * @return string
+     * @return class-string<\Symfony\Component\Form\FormTypeInterface>
      */
     protected function createGeneralForm()
     {
@@ -827,8 +830,8 @@ class ProductFormAdd extends AbstractType
      */
     protected function createNewFromRangeConstraint()
     {
-        return new Callback([
-            'callback' => function ($newFrom, ExecutionContextInterface $context) {
+        return new Callback(
+            callback: function ($newFrom, ExecutionContextInterface $context) {
                 $formData = $context->getRoot()->getData();
                 if (!$newFrom) {
                     return;
@@ -844,7 +847,7 @@ class ProductFormAdd extends AbstractType
                     }
                 }
             },
-        ]);
+        );
     }
 
     /**
@@ -852,8 +855,8 @@ class ProductFormAdd extends AbstractType
      */
     protected function createNewToFieldRangeConstraint()
     {
-        return new Callback([
-            'callback' => function ($newTo, ExecutionContextInterface $context) {
+        return new Callback(
+            callback: function ($newTo, ExecutionContextInterface $context) {
                 $formData = $context->getRoot()->getData();
                 if (!$newTo) {
                     return;
@@ -865,7 +868,7 @@ class ProductFormAdd extends AbstractType
                     }
                 }
             },
-        ]);
+        );
     }
 
     /**

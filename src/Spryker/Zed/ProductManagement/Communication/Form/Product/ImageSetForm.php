@@ -216,8 +216,8 @@ class ImageSetForm extends AbstractSubForm
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
-                'constraints' => [new Callback([
-                    'callback' => function ($images, ExecutionContextInterface $context) {
+                'constraints' => [new Callback(
+                    callback: function ($images, ExecutionContextInterface $context) {
                         $selectedAttributes = [];
                         foreach ($images as $valueSet) {
                             if (!empty($valueSet['value'])) {
@@ -231,8 +231,8 @@ class ImageSetForm extends AbstractSubForm
                             $context->addViolation('Please enter required image information');
                         }
                     },
-                    'groups' => [static::VALIDATION_GROUP_IMAGE_COLLECTION],
-                ])],
+                    groups: [static::VALIDATION_GROUP_IMAGE_COLLECTION],
+                )],
             ]);
 
         return $this;

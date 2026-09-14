@@ -58,8 +58,8 @@ class ProductFormEdit extends ProductFormAdd
                     new SkuRegex([
                         'groups' => [static::VALIDATION_GROUP_UNIQUE_SKU],
                     ]),
-                    new Callback([
-                        'callback' => function ($sku, ExecutionContextInterface $context) {
+                    new Callback(
+                        callback: function ($sku, ExecutionContextInterface $context) {
                             $form = $context->getRoot();
                             $idProductAbstract = $form->get(ProductFormAdd::FIELD_ID_PRODUCT_ABSTRACT)->getData();
 
@@ -79,8 +79,8 @@ class ProductFormEdit extends ProductFormAdd
                                 );
                             }
                         },
-                        'groups' => [static::VALIDATION_GROUP_UNIQUE_SKU],
-                    ]),
+                        groups: [static::VALIDATION_GROUP_UNIQUE_SKU],
+                    ),
                 ],
             ]);
 

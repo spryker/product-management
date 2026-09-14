@@ -215,7 +215,7 @@ class AttributeAbstractForm extends AbstractSubForm
             $config['attr']['readonly'] = true; // Check if this will work too or if we need to add readonly only to the attr if $isDisabled is true
             $input = $inputManager->getSymfonyInputType('', $value);
         } else {
-            if (strtolower($input) === Select2ComboBoxType::class) {
+            if ($input === Select2ComboBoxType::class) {
                 $idLocale = $this->getFactory()->createLocaleProvider()->getCurrentLocale()->getIdLocale();
                 // @phpstan-ignore instanceof.alwaysTrue (defensive programming)
                 if ($this->localeTransfer instanceof LocaleTransfer) {

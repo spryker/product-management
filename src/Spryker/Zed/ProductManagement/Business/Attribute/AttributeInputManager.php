@@ -34,7 +34,7 @@ class AttributeInputManager
     protected const VALUE_LENGTH_LIMIT = 255;
 
     /**
-     * @var array<string, string>
+     * @var array<string, class-string<\Symfony\Component\Form\FormTypeInterface>>
      */
     protected const INPUT_TYPE_TO_SYMFONY_INPUT_TYPE_MAP = [
         self::INPUT_TYPE_TEXT => TextType::class,
@@ -42,6 +42,9 @@ class AttributeInputManager
         self::INPUT_TYPE_SELECT2 => Select2ComboBoxType::class,
     ];
 
+    /**
+     * @return class-string<\Symfony\Component\Form\FormTypeInterface>
+     */
     public function getSymfonyInputType(string $inputType, ?string $value = null): string
     {
         if (mb_strlen($value) > static::VALUE_LENGTH_LIMIT) {
