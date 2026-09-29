@@ -25,11 +25,11 @@ function initialize() {
 }
 
 function handleSuperAttributeCheckboxChange(e) {
-    var $target = $(e.target),
-        checkboxState = $target.is(':checked'),
-        $inputsGroup = $target.closest('.super-attribute-inputs-group'),
-        $textInput = $($inputsGroup.find('.super-attribute-text-input')[0]),
-        $dropdownInput = $($inputsGroup.find('.super-attribute-dropdown-input')[0]);
+    var $target = $(e.target);
+    var checkboxState = $target.is(':checked');
+    var $inputsGroup = $target.closest('.super-attribute-inputs-group');
+    var $textInput = $($inputsGroup.find('.super-attribute-text-input')[0]);
+    var $dropdownInput = $($inputsGroup.find('.super-attribute-dropdown-input')[0]);
 
     $dropdownInput.prop('disabled', checkboxState);
     checkboxState ? $textInput.removeClass('hidden') : $textInput.addClass('hidden');
