@@ -298,11 +298,6 @@ class ProductTableTest extends Unit
         $this->assertEquals($abstractSku, $productTableData[0][ProductTableMock::COL_SKU]);
     }
 
-    /**
-     * @group CC-40027
-     *
-     * @return void
-     */
     public function testFetchDataReturnsAbstractProductOnceWhenAssignedToMultipleStores(): void
     {
         // Arrange
