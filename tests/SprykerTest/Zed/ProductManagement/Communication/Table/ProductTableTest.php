@@ -51,6 +51,12 @@ class ProductTableTest extends Unit
      */
     protected const STORE_NAME_AT = 'AT';
 
+    protected const string STORE_NAME_US = 'US';
+
+    protected const string PRODUCT_NAME_FILTERED = 'Filtered product name';
+
+    protected const string PRODUCT_NAME_OTHER = 'Other product name';
+
     /**
      * @uses \Spryker\Zed\Twig\Communication\Plugin\Application\TwigApplicationPlugin::SERVICE_TWIG
      *
@@ -327,6 +333,84 @@ class ProductTableTest extends Unit
         });
         $this->assertCount(1, $matchingRows, 'Abstract product assigned to two stores must appear exactly once.');
         $this->assertCount(1, $productTableData);
+    }
+
+    public function testGivenAProductOnlyInAnotherStoreWhenFetchDataFilteredByAStoreThenTheProductIsExcluded(): void
+    {
+        // Arrange
+        $storeDeTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_DE]);
+        $storeAtTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_AT]);
+        $productAbstractInAtTransfer = $this->haveNamedProductInStores(static::PRODUCT_NAME_FILTERED, [$storeAtTransfer], true);
+        $this->haveNamedProductInStores(static::PRODUCT_NAME_FILTERED, [$storeDeTransfer], true);
+
+        $productTableMock = $this->createProductTableMock($this->localeTransfers[static::LOCALE_NAME_DE]);
+        $productTableMock->applyCriteria((new ProductTableCriteriaTransfer())->setStores([$storeAtTransfer->getIdStoreOrFail()]));
+
+        // Act
+        $productTableData = $productTableMock->fetchData();
+
+        // Assert
+        $this->assertSame(
+            [$productAbstractInAtTransfer->getSkuOrFail()],
+            array_column($productTableData, ProductTableMock::COL_SKU),
+        );
+    }
+
+    public function testGivenStatusStoreAndNameCriteriaWhenFetchDataThenOnlyTheProductMatchingAllOfThemIsReturned(): void
+    {
+        // Arrange
+        $storeDeTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_DE]);
+        $storeAtTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_AT]);
+        $storeUsTransfer = $this->tester->haveStore([StoreTransfer::NAME => static::STORE_NAME_US]);
+        $matchingProductAbstractTransfer = $this->haveNamedProductInStores(static::PRODUCT_NAME_FILTERED, [$storeDeTransfer], true);
+        $this->haveNamedProductInStores(static::PRODUCT_NAME_FILTERED, [$storeDeTransfer], false);
+        $this->haveNamedProductInStores(static::PRODUCT_NAME_FILTERED, [$storeUsTransfer], true);
+        $this->haveNamedProductInStores(static::PRODUCT_NAME_OTHER, [$storeAtTransfer], true);
+
+        $productTableMock = $this->createProductTableMock($this->localeTransfers[static::LOCALE_NAME_DE]);
+        $productTableMock->applyCriteria(
+            (new ProductTableCriteriaTransfer())
+                ->setStatus(ProductStatusEnum::ACTIVE->value)
+                ->setStores([$storeDeTransfer->getIdStoreOrFail(), $storeAtTransfer->getIdStoreOrFail()]),
+        );
+        $productTableMock->setSearchTerm(static::PRODUCT_NAME_FILTERED);
+
+        // Act
+        $productTableData = $productTableMock->fetchData();
+
+        // Assert
+        $this->assertSame(
+            [$matchingProductAbstractTransfer->getSkuOrFail()],
+            array_column($productTableData, ProductTableMock::COL_SKU),
+        );
+    }
+
+    /**
+     * @param list<\Generated\Shared\Transfer\StoreTransfer> $storeTransfers
+     */
+    protected function haveNamedProductInStores(string $name, array $storeTransfers, bool $isActive): ProductAbstractTransfer
+    {
+        $storeRelationTransfer = new StoreRelationTransfer();
+
+        foreach ($storeTransfers as $storeTransfer) {
+            $storeRelationTransfer
+                ->addStores($storeTransfer)
+                ->addIdStores($storeTransfer->getIdStoreOrFail());
+        }
+
+        $productAbstractTransfer = $this->tester->haveProductAbstract([
+            ProductAbstractTransfer::STORE_RELATION => $storeRelationTransfer,
+        ]);
+        $this->tester->addLocalizedAttributesToProductAbstract($productAbstractTransfer, [
+            $this->createLocalizedAttributesTransfer($name, $this->localeTransfers[static::LOCALE_NAME_DE]),
+        ]);
+        $this->tester->haveProductConcrete([
+            ProductConcreteTransfer::FK_PRODUCT_ABSTRACT => $productAbstractTransfer->getIdProductAbstractOrFail(),
+            ProductConcreteTransfer::ABSTRACT_SKU => $productAbstractTransfer->getSkuOrFail(),
+            ProductConcreteTransfer::IS_ACTIVE => $isActive,
+        ]);
+
+        return $productAbstractTransfer;
     }
 
     protected function registerTwigServiceMock(): void
