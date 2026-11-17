@@ -175,8 +175,6 @@ class BundledProductTable extends AbstractTable
             ),
         );
 
-        $defaultPriceMode = $this->priceFacade->getDefaultPriceMode();
-
         $header = [
             static::COL_SELECT => 'Select',
             static::COL_ID_PRODUCT_CONCRETE => 'id product',
