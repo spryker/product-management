@@ -14,23 +14,14 @@
                 {% endblock %}
 
                 {% block content %}
+                    {% set attributeRowsTemplates = hasMetaAttributes
+                        ? ['@ProductExperienceManagement/ProductManagement/_partials/info-attribute-rows.twig', '@ProductManagement/View/_partials/info-attribute-rows.twig']
+                        : ['@ProductManagement/View/_partials/info-attribute-rows.twig'] %}
 
-                    {% if hasMetaAttributes %}
-                        {% include '@ProductExperienceManagement/ProductManagement/_partials/info-attribute-rows.twig' ignore missing with {
-                            attributes: attributes,
-                            metaAttributes: metaAttributes,
-                        } %}
-                    {% else %}
-                        {% for name,value in attributes %}
-                            <div class="row">
-                                <div class="col-4"><b>{{ name }}</b></div>
-                                <div class="col-8">{{ value | join(', ') }}</div>
-                            </div>
-                            {% if not loop.last %}
-                                <div class="hr-line-dashed"></div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
+                    {% include attributeRowsTemplates with {
+                        attributes: attributes,
+                        metaAttributes: hasMetaAttributes ? metaAttributes : [],
+                    } %}
 
                 {% endblock %}
             {% endembed %}
